@@ -1,0 +1,7 @@
+representation,task,n_classes,chance,logreg_balacc,knn_balacc
+ChemBERTa,cultural stratum,4,0.24,0.56,0.52
+ChemBERTa,bioactivity class,14,0.072,0.23,0.172
+ChemBERTa,bioavailability tier,3,0.308,0.593,0.509
+RDKit-physchem,cultural stratum,4,0.24,0.42,0.47
+RDKit-physchem,bioactivity class,14,0.072,0.274,0.21
+RDKit-physchem,bioavailability tier,3,0.308,0.709,0.535
