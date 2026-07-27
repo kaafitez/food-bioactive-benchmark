@@ -1,0 +1,401 @@
+model,compound,stratum,correct_bioactivity,correct_food,correct_cultural,correct_bioavail,parse_flag,overall
+Haiku-4.5,quercetin,Western,True,True,True,True,0,1.0
+Haiku-4.5,kaempferol,Western,True,True,False,True,0,0.75
+Haiku-4.5,myricetin,Western,True,True,True,True,0,1.0
+Haiku-4.5,apigenin,Western,True,True,True,True,0,1.0
+Haiku-4.5,luteolin,Western,True,True,True,True,0,1.0
+Haiku-4.5,resveratrol,Western,False,True,True,True,0,0.75
+Haiku-4.5,caffeic acid,Western,True,True,True,True,0,1.0
+Haiku-4.5,chlorogenic acid,Western,True,True,True,False,0,0.75
+Haiku-4.5,ferulic acid,Western,True,True,False,True,0,0.75
+Haiku-4.5,ellagic acid,Western,False,True,True,True,0,0.75
+Haiku-4.5,naringenin,Western,False,False,True,False,0,0.25
+Haiku-4.5,hesperetin,Western,True,True,True,True,0,1.0
+Haiku-4.5,cyanidin,Western,True,True,True,True,0,1.0
+Haiku-4.5,delphinidin,Western,True,False,True,True,0,0.75
+Haiku-4.5,oleuropein,Western,True,True,True,True,0,1.0
+Haiku-4.5,hydroxytyrosol,Western,True,True,True,True,0,1.0
+Haiku-4.5,pterostilbene,Western,True,True,True,True,0,1.0
+Haiku-4.5,gallic acid,Western,True,True,False,True,0,0.75
+Haiku-4.5,genistein,East Asian,True,True,True,True,0,1.0
+Haiku-4.5,daidzein,East Asian,True,True,True,True,0,1.0
+Haiku-4.5,allicin,East Asian,True,True,False,True,0,0.75
+Haiku-4.5,epigallocatechin gallate,East Asian,True,True,True,True,0,1.0
+Haiku-4.5,theaflavin,East Asian,True,True,True,False,0,0.75
+Haiku-4.5,berberine,East Asian,True,True,True,True,0,1.0
+Haiku-4.5,honokiol,East Asian,False,True,True,True,0,0.75
+Haiku-4.5,tanshinone IIA,East Asian,False,True,True,True,0,0.75
+Haiku-4.5,ginsenoside Rb1,East Asian,True,True,True,True,0,1.0
+Haiku-4.5,ginsenoside Rg1,East Asian,True,True,True,True,0,1.0
+Haiku-4.5,6-gingerol,East Asian,True,True,True,False,0,0.75
+Haiku-4.5,nobiletin,East Asian,True,True,True,False,0,0.75
+Haiku-4.5,tangeretin,East Asian,False,True,False,False,0,0.25
+Haiku-4.5,schisandrin A,East Asian,True,True,True,True,0,1.0
+Haiku-4.5,icariin,East Asian,False,True,True,True,0,0.75
+Haiku-4.5,sulforaphane,East Asian,False,True,False,False,0,0.25
+Haiku-4.5,puerarin,East Asian,False,True,True,True,0,0.75
+Haiku-4.5,curcumin,South Asian,True,True,True,True,0,1.0
+Haiku-4.5,demethoxycurcumin,South Asian,True,True,True,True,0,1.0
+Haiku-4.5,bisdemethoxycurcumin,South Asian,True,True,True,True,0,1.0
+Haiku-4.5,piperine,South Asian,False,True,True,True,0,0.75
+Haiku-4.5,withaferin A,South Asian,False,False,True,True,0,0.5
+Haiku-4.5,andrographolide,South Asian,False,True,True,False,0,0.5
+Haiku-4.5,bacoside A,South Asian,False,True,True,True,0,0.75
+Haiku-4.5,gymnemic acid I,South Asian,True,True,True,True,0,1.0
+Haiku-4.5,boswellic acid,South Asian,True,True,True,True,0,1.0
+Haiku-4.5,guggulsterone,South Asian,True,True,True,False,0,0.75
+Haiku-4.5,forskolin,South Asian,False,True,True,True,0,0.75
+Haiku-4.5,thymoquinone,South Asian,True,True,True,True,0,1.0
+Haiku-4.5,eugenol,South Asian,False,True,False,False,0,0.25
+Haiku-4.5,mangiferin,South Asian,True,True,True,True,0,1.0
+Haiku-4.5,gallocatechin,South Asian,True,True,False,True,0,0.75
+Haiku-4.5,azadirachtin,South Asian,False,True,True,True,0,0.75
+Haiku-4.5,embelin,South Asian,False,True,True,False,0,0.5
+Haiku-4.5,aspalathin,African,True,True,True,False,0,0.75
+Haiku-4.5,nothofagin,African,True,False,False,False,0,0.25
+Haiku-4.5,kolaviron,African,False,True,True,True,0,0.75
+Haiku-4.5,6-paradol,African,False,False,False,True,0,0.25
+Haiku-4.5,6-shogaol,African,True,True,False,True,0,0.75
+Haiku-4.5,mesembrine,African,False,False,True,True,0,0.5
+Haiku-4.5,catechin,African,True,True,False,False,0,0.5
+Haiku-4.5,hydroxycitric acid,African,True,True,False,False,0,0.5
+Haiku-4.5,epicatechin,African,False,True,False,True,0,0.5
+Haiku-4.5,caffeine,African,True,True,False,True,0,0.75
+Haiku-4.5,gnetin C,African,True,False,False,True,0,0.5
+Haiku-4.5,mangiferin (honeybush),African,True,True,True,False,0,0.75
+Haiku-4.5,iso-orientin,African,True,False,False,False,0,0.25
+Haiku-4.5,delphinidin 3-sambubioside,African,True,False,False,True,0,0.5
+Haiku-4.5,cyanidin 3-sambubioside,African,True,False,False,True,0,0.5
+Haiku-4.5,xanthohumol,African,False,True,False,False,0,0.25
+Haiku-4.5,kaurenoic acid,African,False,False,False,True,0,0.25
+Haiku-4.5,rosmarinic acid,Western,True,True,True,False,0,0.75
+Haiku-4.5,carnosic acid,Western,True,True,True,False,0,0.75
+Haiku-4.5,lycopene,Western,True,True,True,True,0,1.0
+Haiku-4.5,silibinin,Western,True,True,True,True,0,1.0
+Haiku-4.5,fisetin,Western,False,True,True,True,0,0.75
+Haiku-4.5,pinoresinol,Western,True,True,False,True,0,0.75
+Haiku-4.5,oleocanthal,Western,True,True,True,True,0,1.0
+Haiku-4.5,baicalein,East Asian,True,True,True,False,0,0.75
+Haiku-4.5,wogonin,East Asian,False,True,True,True,0,0.75
+Haiku-4.5,astragaloside IV,East Asian,False,True,True,True,0,0.75
+Haiku-4.5,ginsenoside Rg3,East Asian,False,True,True,True,0,0.75
+Haiku-4.5,ginkgolide B,East Asian,False,True,True,False,0,0.5
+Haiku-4.5,epicatechin gallate,East Asian,True,True,True,True,0,1.0
+Haiku-4.5,diallyl disulfide,East Asian,False,True,False,True,0,0.5
+Haiku-4.5,salvianolic acid B,East Asian,False,True,True,True,0,0.75
+Haiku-4.5,ar-turmerone,South Asian,False,True,True,False,0,0.5
+Haiku-4.5,withanolide A,South Asian,False,False,True,False,0,0.25
+Haiku-4.5,asiatic acid,South Asian,False,True,False,True,0,0.5
+Haiku-4.5,asiaticoside,South Asian,False,True,True,True,0,0.75
+Haiku-4.5,sesamin,South Asian,False,True,False,True,0,0.5
+Haiku-4.5,ursolic acid,South Asian,False,True,False,True,0,0.5
+Haiku-4.5,carvacrol,South Asian,True,True,False,True,0,0.75
+Haiku-4.5,lupeol,South Asian,True,False,False,True,0,0.5
+Haiku-4.5,theobromine,African,True,False,False,True,0,0.5
+Haiku-4.5,vitexin,African,True,False,False,True,0,0.5
+Haiku-4.5,orientin,African,True,False,False,False,0,0.25
+Haiku-4.5,harpagoside,African,True,False,True,False,0,0.5
+Haiku-4.5,hypoxoside,African,False,False,True,True,0,0.5
+Haiku-4.5,mesembrenone,African,False,True,True,True,0,0.75
+Haiku-4.5,isomangiferin,African,True,False,False,True,0,0.5
+Haiku-4.5,punicalagin,African,True,True,False,True,0,0.75
+Sonnet-4.5,quercetin,Western,True,True,True,True,0,1.0
+Sonnet-4.5,kaempferol,Western,True,True,True,True,0,1.0
+Sonnet-4.5,myricetin,Western,True,True,True,True,0,1.0
+Sonnet-4.5,apigenin,Western,True,True,True,True,0,1.0
+Sonnet-4.5,luteolin,Western,True,True,True,True,0,1.0
+Sonnet-4.5,resveratrol,Western,False,True,True,True,0,0.75
+Sonnet-4.5,caffeic acid,Western,True,True,True,True,0,1.0
+Sonnet-4.5,chlorogenic acid,Western,True,True,True,False,0,0.75
+Sonnet-4.5,ferulic acid,Western,True,False,True,False,0,0.5
+Sonnet-4.5,ellagic acid,Western,False,True,True,True,0,0.75
+Sonnet-4.5,naringenin,Western,True,False,True,False,0,0.5
+Sonnet-4.5,hesperetin,Western,True,False,True,False,0,0.5
+Sonnet-4.5,cyanidin,Western,True,True,True,True,0,1.0
+Sonnet-4.5,delphinidin,Western,True,False,True,True,0,0.75
+Sonnet-4.5,oleuropein,Western,False,True,True,True,0,0.75
+Sonnet-4.5,hydroxytyrosol,Western,True,True,True,True,0,1.0
+Sonnet-4.5,pterostilbene,Western,True,False,True,False,0,0.5
+Sonnet-4.5,gallic acid,Western,True,True,True,True,0,1.0
+Sonnet-4.5,genistein,East Asian,True,False,True,False,0,0.5
+Sonnet-4.5,daidzein,East Asian,True,True,True,True,0,1.0
+Sonnet-4.5,allicin,East Asian,True,True,False,False,0,0.5
+Sonnet-4.5,epigallocatechin gallate,East Asian,True,True,True,True,0,1.0
+Sonnet-4.5,theaflavin,East Asian,True,True,True,True,0,1.0
+Sonnet-4.5,berberine,East Asian,True,False,True,True,0,0.75
+Sonnet-4.5,honokiol,East Asian,False,True,True,False,0,0.5
+Sonnet-4.5,tanshinone IIA,East Asian,True,True,True,True,0,1.0
+Sonnet-4.5,ginsenoside Rb1,East Asian,True,True,True,True,0,1.0
+Sonnet-4.5,ginsenoside Rg1,East Asian,True,True,True,True,0,1.0
+Sonnet-4.5,6-gingerol,East Asian,True,True,False,True,0,0.75
+Sonnet-4.5,nobiletin,East Asian,True,True,True,False,0,0.75
+Sonnet-4.5,tangeretin,East Asian,True,True,True,False,0,0.75
+Sonnet-4.5,schisandrin A,East Asian,True,True,True,True,0,1.0
+Sonnet-4.5,icariin,East Asian,False,True,True,True,0,0.75
+Sonnet-4.5,sulforaphane,East Asian,True,True,False,False,0,0.5
+Sonnet-4.5,puerarin,East Asian,True,True,True,True,0,1.0
+Sonnet-4.5,curcumin,South Asian,True,True,True,True,0,1.0
+Sonnet-4.5,demethoxycurcumin,South Asian,True,True,True,True,0,1.0
+Sonnet-4.5,bisdemethoxycurcumin,South Asian,True,True,True,True,0,1.0
+Sonnet-4.5,piperine,South Asian,False,True,True,True,0,0.75
+Sonnet-4.5,withaferin A,South Asian,True,False,True,True,0,0.75
+Sonnet-4.5,andrographolide,South Asian,False,True,True,False,0,0.5
+Sonnet-4.5,bacoside A,South Asian,True,True,True,True,0,1.0
+Sonnet-4.5,gymnemic acid I,South Asian,True,True,True,True,0,1.0
+Sonnet-4.5,boswellic acid,South Asian,True,True,True,True,0,1.0
+Sonnet-4.5,guggulsterone,South Asian,True,True,True,False,0,0.75
+Sonnet-4.5,forskolin,South Asian,False,True,True,False,0,0.5
+Sonnet-4.5,thymoquinone,South Asian,False,False,True,False,0,0.25
+Sonnet-4.5,eugenol,South Asian,False,True,True,False,0,0.5
+Sonnet-4.5,mangiferin,South Asian,True,True,True,True,0,1.0
+Sonnet-4.5,gallocatechin,South Asian,True,True,False,True,0,0.75
+Sonnet-4.5,azadirachtin,South Asian,False,True,True,True,0,0.75
+Sonnet-4.5,embelin,South Asian,False,True,True,True,0,0.75
+Sonnet-4.5,aspalathin,African,True,True,True,True,0,1.0
+Sonnet-4.5,nothofagin,African,True,False,False,False,0,0.25
+Sonnet-4.5,kolaviron,African,True,True,True,True,0,1.0
+Sonnet-4.5,6-paradol,African,False,False,False,True,0,0.25
+Sonnet-4.5,6-shogaol,African,True,True,False,True,0,0.75
+Sonnet-4.5,mesembrine,African,True,False,True,True,0,0.75
+Sonnet-4.5,catechin,African,True,False,False,True,0,0.5
+Sonnet-4.5,hydroxycitric acid,African,True,True,False,False,0,0.5
+Sonnet-4.5,epicatechin,African,False,True,False,False,0,0.25
+Sonnet-4.5,caffeine,African,True,True,False,True,0,0.75
+Sonnet-4.5,gnetin C,African,True,True,False,True,0,0.75
+Sonnet-4.5,mangiferin (honeybush),African,True,True,True,True,0,1.0
+Sonnet-4.5,iso-orientin,African,True,False,False,True,0,0.5
+Sonnet-4.5,delphinidin 3-sambubioside,African,True,False,False,True,0,0.5
+Sonnet-4.5,cyanidin 3-sambubioside,African,True,False,False,True,0,0.5
+Sonnet-4.5,xanthohumol,African,True,True,False,True,0,0.75
+Sonnet-4.5,kaurenoic acid,African,False,False,False,False,0,0.0
+Sonnet-4.5,rosmarinic acid,Western,False,True,True,False,0,0.5
+Sonnet-4.5,carnosic acid,Western,True,True,True,False,0,0.75
+Sonnet-4.5,lycopene,Western,True,True,True,True,0,1.0
+Sonnet-4.5,silibinin,Western,True,True,True,True,0,1.0
+Sonnet-4.5,fisetin,Western,False,False,True,True,0,0.5
+Sonnet-4.5,pinoresinol,Western,True,True,False,True,0,0.75
+Sonnet-4.5,oleocanthal,Western,True,True,True,True,0,1.0
+Sonnet-4.5,baicalein,East Asian,True,True,True,True,0,1.0
+Sonnet-4.5,wogonin,East Asian,False,True,True,True,0,0.75
+Sonnet-4.5,astragaloside IV,East Asian,False,True,True,True,0,0.75
+Sonnet-4.5,ginsenoside Rg3,East Asian,False,True,True,True,0,0.75
+Sonnet-4.5,ginkgolide B,East Asian,True,True,True,True,0,1.0
+Sonnet-4.5,epicatechin gallate,East Asian,True,True,True,True,0,1.0
+Sonnet-4.5,diallyl disulfide,East Asian,True,True,False,True,0,0.75
+Sonnet-4.5,salvianolic acid B,East Asian,True,True,True,True,0,1.0
+Sonnet-4.5,ar-turmerone,South Asian,False,True,True,False,0,0.5
+Sonnet-4.5,withanolide A,South Asian,False,False,True,True,0,0.5
+Sonnet-4.5,asiatic acid,South Asian,False,True,True,True,0,0.75
+Sonnet-4.5,asiaticoside,South Asian,True,True,True,True,0,1.0
+Sonnet-4.5,sesamin,South Asian,False,True,False,True,0,0.5
+Sonnet-4.5,ursolic acid,South Asian,False,True,False,True,0,0.5
+Sonnet-4.5,carvacrol,South Asian,True,True,False,True,0,0.75
+Sonnet-4.5,lupeol,South Asian,True,True,True,True,0,1.0
+Sonnet-4.5,theobromine,African,True,False,False,True,0,0.5
+Sonnet-4.5,vitexin,African,True,False,False,True,0,0.5
+Sonnet-4.5,orientin,African,True,False,False,False,0,0.25
+Sonnet-4.5,harpagoside,African,True,False,True,False,0,0.5
+Sonnet-4.5,hypoxoside,African,False,False,True,True,0,0.5
+Sonnet-4.5,mesembrenone,African,False,False,False,False,1,0.0
+Sonnet-4.5,isomangiferin,African,True,False,False,True,0,0.5
+Sonnet-4.5,punicalagin,African,True,True,False,True,0,0.75
+Opus-4.5,quercetin,Western,True,True,True,True,0,1.0
+Opus-4.5,kaempferol,Western,True,True,False,True,0,0.75
+Opus-4.5,myricetin,Western,True,True,True,True,0,1.0
+Opus-4.5,apigenin,Western,True,True,True,True,0,1.0
+Opus-4.5,luteolin,Western,True,True,True,True,0,1.0
+Opus-4.5,resveratrol,Western,False,True,True,True,0,0.75
+Opus-4.5,caffeic acid,Western,True,True,True,False,0,0.75
+Opus-4.5,chlorogenic acid,Western,True,True,True,False,0,0.75
+Opus-4.5,ferulic acid,Western,True,True,False,True,0,0.75
+Opus-4.5,ellagic acid,Western,False,True,True,True,0,0.75
+Opus-4.5,naringenin,Western,True,False,True,False,0,0.5
+Opus-4.5,hesperetin,Western,True,False,True,False,0,0.5
+Opus-4.5,cyanidin,Western,True,True,True,True,0,1.0
+Opus-4.5,delphinidin,Western,True,True,True,True,0,1.0
+Opus-4.5,oleuropein,Western,False,True,True,False,0,0.5
+Opus-4.5,hydroxytyrosol,Western,True,True,True,True,0,1.0
+Opus-4.5,pterostilbene,Western,True,False,True,False,0,0.5
+Opus-4.5,gallic acid,Western,True,True,False,True,0,0.75
+Opus-4.5,genistein,East Asian,True,True,True,False,0,0.75
+Opus-4.5,daidzein,East Asian,True,True,True,True,0,1.0
+Opus-4.5,allicin,East Asian,True,True,False,False,0,0.5
+Opus-4.5,epigallocatechin gallate,East Asian,True,True,True,True,0,1.0
+Opus-4.5,theaflavin,East Asian,True,True,True,True,0,1.0
+Opus-4.5,berberine,East Asian,True,True,True,True,0,1.0
+Opus-4.5,honokiol,East Asian,True,True,True,True,0,1.0
+Opus-4.5,tanshinone IIA,East Asian,True,True,True,True,0,1.0
+Opus-4.5,ginsenoside Rb1,East Asian,True,True,True,True,0,1.0
+Opus-4.5,ginsenoside Rg1,East Asian,True,True,True,True,0,1.0
+Opus-4.5,6-gingerol,East Asian,True,True,True,True,0,1.0
+Opus-4.5,nobiletin,East Asian,True,True,True,False,0,0.75
+Opus-4.5,tangeretin,East Asian,False,True,True,False,0,0.5
+Opus-4.5,schisandrin A,East Asian,True,True,True,True,0,1.0
+Opus-4.5,icariin,East Asian,False,True,True,True,0,0.75
+Opus-4.5,sulforaphane,East Asian,True,True,False,False,0,0.5
+Opus-4.5,puerarin,East Asian,True,True,True,True,0,1.0
+Opus-4.5,curcumin,South Asian,True,True,True,True,0,1.0
+Opus-4.5,demethoxycurcumin,South Asian,True,True,True,True,0,1.0
+Opus-4.5,bisdemethoxycurcumin,South Asian,True,True,True,True,0,1.0
+Opus-4.5,piperine,South Asian,False,True,True,True,0,0.75
+Opus-4.5,withaferin A,South Asian,False,False,True,True,0,0.5
+Opus-4.5,andrographolide,South Asian,False,True,True,False,0,0.5
+Opus-4.5,bacoside A,South Asian,True,True,True,True,0,1.0
+Opus-4.5,gymnemic acid I,South Asian,True,True,True,True,0,1.0
+Opus-4.5,boswellic acid,South Asian,True,True,True,True,0,1.0
+Opus-4.5,guggulsterone,South Asian,True,True,True,False,0,0.75
+Opus-4.5,forskolin,South Asian,False,True,True,False,0,0.5
+Opus-4.5,thymoquinone,South Asian,False,False,True,False,0,0.25
+Opus-4.5,eugenol,South Asian,False,True,True,False,0,0.5
+Opus-4.5,mangiferin,South Asian,True,True,True,True,0,1.0
+Opus-4.5,gallocatechin,South Asian,True,True,False,True,0,0.75
+Opus-4.5,azadirachtin,South Asian,False,True,True,True,0,0.75
+Opus-4.5,embelin,South Asian,False,True,True,True,0,0.75
+Opus-4.5,aspalathin,African,True,True,True,True,0,1.0
+Opus-4.5,nothofagin,African,True,True,True,False,0,0.75
+Opus-4.5,kolaviron,African,True,True,True,True,0,1.0
+Opus-4.5,6-paradol,African,False,False,False,True,0,0.25
+Opus-4.5,6-shogaol,African,True,True,False,True,0,0.75
+Opus-4.5,mesembrine,African,True,False,True,True,0,0.75
+Opus-4.5,catechin,African,True,False,False,True,0,0.5
+Opus-4.5,hydroxycitric acid,African,True,True,False,True,0,0.75
+Opus-4.5,epicatechin,African,False,True,False,True,0,0.5
+Opus-4.5,caffeine,African,True,True,False,True,0,0.75
+Opus-4.5,gnetin C,African,True,True,False,False,0,0.5
+Opus-4.5,mangiferin (honeybush),African,True,True,True,True,0,1.0
+Opus-4.5,iso-orientin,African,True,False,False,False,0,0.25
+Opus-4.5,delphinidin 3-sambubioside,African,True,False,False,True,0,0.5
+Opus-4.5,cyanidin 3-sambubioside,African,True,False,False,True,0,0.5
+Opus-4.5,xanthohumol,African,True,True,False,True,0,0.75
+Opus-4.5,kaurenoic acid,African,False,False,False,False,0,0.0
+Opus-4.5,rosmarinic acid,Western,True,True,True,True,0,1.0
+Opus-4.5,carnosic acid,Western,True,True,True,False,0,0.75
+Opus-4.5,lycopene,Western,True,False,True,True,0,0.75
+Opus-4.5,silibinin,Western,True,True,True,True,0,1.0
+Opus-4.5,fisetin,Western,False,False,True,True,0,0.5
+Opus-4.5,pinoresinol,Western,True,True,False,True,0,0.75
+Opus-4.5,oleocanthal,Western,True,True,True,True,0,1.0
+Opus-4.5,baicalein,East Asian,True,True,True,True,0,1.0
+Opus-4.5,wogonin,East Asian,False,True,True,True,0,0.75
+Opus-4.5,astragaloside IV,East Asian,False,True,True,True,0,0.75
+Opus-4.5,ginsenoside Rg3,East Asian,False,True,True,True,0,0.75
+Opus-4.5,ginkgolide B,East Asian,True,True,True,False,0,0.75
+Opus-4.5,epicatechin gallate,East Asian,True,True,True,True,0,1.0
+Opus-4.5,diallyl disulfide,East Asian,False,True,False,True,0,0.5
+Opus-4.5,salvianolic acid B,East Asian,True,True,True,True,0,1.0
+Opus-4.5,ar-turmerone,South Asian,True,True,True,False,0,0.75
+Opus-4.5,withanolide A,South Asian,False,False,True,True,0,0.5
+Opus-4.5,asiatic acid,South Asian,True,True,True,True,0,1.0
+Opus-4.5,asiaticoside,South Asian,True,True,True,True,0,1.0
+Opus-4.5,sesamin,South Asian,False,True,False,False,0,0.25
+Opus-4.5,ursolic acid,South Asian,False,True,False,True,0,0.5
+Opus-4.5,carvacrol,South Asian,True,True,False,True,0,0.75
+Opus-4.5,lupeol,South Asian,True,True,True,True,0,1.0
+Opus-4.5,theobromine,African,True,False,False,True,0,0.5
+Opus-4.5,vitexin,African,True,False,False,True,0,0.5
+Opus-4.5,orientin,African,True,False,False,True,0,0.5
+Opus-4.5,harpagoside,African,True,False,True,False,0,0.5
+Opus-4.5,hypoxoside,African,False,False,True,True,0,0.5
+Opus-4.5,mesembrenone,African,True,True,True,True,0,1.0
+Opus-4.5,isomangiferin,African,True,False,False,True,0,0.5
+Opus-4.5,punicalagin,African,True,True,False,True,0,0.75
+Sonnet-5,quercetin,Western,True,True,True,True,0,1.0
+Sonnet-5,kaempferol,Western,True,True,True,True,0,1.0
+Sonnet-5,myricetin,Western,True,True,True,True,0,1.0
+Sonnet-5,apigenin,Western,True,True,True,True,0,1.0
+Sonnet-5,luteolin,Western,True,True,True,True,0,1.0
+Sonnet-5,resveratrol,Western,False,True,True,True,0,0.75
+Sonnet-5,caffeic acid,Western,True,True,True,True,0,1.0
+Sonnet-5,chlorogenic acid,Western,True,True,True,True,0,1.0
+Sonnet-5,ferulic acid,Western,True,False,True,True,0,0.75
+Sonnet-5,ellagic acid,Western,False,True,True,True,0,0.75
+Sonnet-5,naringenin,Western,False,False,True,False,0,0.25
+Sonnet-5,hesperetin,Western,True,False,True,False,0,0.5
+Sonnet-5,cyanidin,Western,True,True,True,True,0,1.0
+Sonnet-5,delphinidin,Western,True,False,True,True,0,0.75
+Sonnet-5,oleuropein,Western,False,True,True,False,0,0.5
+Sonnet-5,hydroxytyrosol,Western,True,True,True,False,0,0.75
+Sonnet-5,pterostilbene,Western,True,False,True,False,0,0.5
+Sonnet-5,gallic acid,Western,True,True,False,True,0,0.75
+Sonnet-5,genistein,East Asian,True,True,True,False,0,0.75
+Sonnet-5,daidzein,East Asian,True,True,True,True,0,1.0
+Sonnet-5,allicin,East Asian,True,True,True,True,0,1.0
+Sonnet-5,epigallocatechin gallate,East Asian,True,True,True,True,0,1.0
+Sonnet-5,theaflavin,East Asian,True,True,True,True,0,1.0
+Sonnet-5,berberine,East Asian,False,False,True,True,0,0.5
+Sonnet-5,honokiol,East Asian,True,True,True,False,0,0.75
+Sonnet-5,tanshinone IIA,East Asian,False,True,True,True,0,0.75
+Sonnet-5,ginsenoside Rb1,East Asian,True,True,True,True,0,1.0
+Sonnet-5,ginsenoside Rg1,East Asian,True,True,True,True,0,1.0
+Sonnet-5,6-gingerol,East Asian,True,True,True,True,0,1.0
+Sonnet-5,nobiletin,East Asian,False,True,True,False,0,0.5
+Sonnet-5,tangeretin,East Asian,True,True,True,False,0,0.75
+Sonnet-5,schisandrin A,East Asian,True,True,True,False,0,0.75
+Sonnet-5,icariin,East Asian,False,True,True,True,0,0.75
+Sonnet-5,sulforaphane,East Asian,True,True,False,True,0,0.75
+Sonnet-5,puerarin,East Asian,False,True,True,True,0,0.75
+Sonnet-5,curcumin,South Asian,True,True,True,True,0,1.0
+Sonnet-5,demethoxycurcumin,South Asian,True,True,True,True,0,1.0
+Sonnet-5,bisdemethoxycurcumin,South Asian,True,True,True,True,0,1.0
+Sonnet-5,piperine,South Asian,False,True,True,True,0,0.75
+Sonnet-5,withaferin A,South Asian,True,False,True,True,0,0.75
+Sonnet-5,andrographolide,South Asian,False,True,True,False,0,0.5
+Sonnet-5,bacoside A,South Asian,True,True,True,True,0,1.0
+Sonnet-5,gymnemic acid I,South Asian,True,True,True,True,0,1.0
+Sonnet-5,boswellic acid,South Asian,True,True,True,True,0,1.0
+Sonnet-5,guggulsterone,South Asian,True,True,True,False,0,0.75
+Sonnet-5,forskolin,South Asian,True,True,True,False,0,0.75
+Sonnet-5,thymoquinone,South Asian,False,True,True,False,0,0.5
+Sonnet-5,eugenol,South Asian,False,True,False,False,0,0.25
+Sonnet-5,mangiferin,South Asian,True,True,True,True,0,1.0
+Sonnet-5,gallocatechin,South Asian,True,True,False,True,0,0.75
+Sonnet-5,azadirachtin,South Asian,False,True,True,True,0,0.75
+Sonnet-5,embelin,South Asian,False,True,True,False,0,0.5
+Sonnet-5,aspalathin,African,True,True,True,False,0,0.75
+Sonnet-5,nothofagin,African,True,True,True,False,0,0.75
+Sonnet-5,kolaviron,African,True,True,True,True,0,1.0
+Sonnet-5,6-paradol,African,False,True,True,True,0,0.75
+Sonnet-5,6-shogaol,African,True,True,False,True,0,0.75
+Sonnet-5,mesembrine,African,True,False,True,True,0,0.75
+Sonnet-5,catechin,African,True,True,False,False,0,0.5
+Sonnet-5,hydroxycitric acid,African,True,True,False,True,0,0.75
+Sonnet-5,epicatechin,African,False,True,False,True,0,0.5
+Sonnet-5,caffeine,African,True,True,False,True,0,0.75
+Sonnet-5,gnetin C,African,True,False,False,True,0,0.5
+Sonnet-5,mangiferin (honeybush),African,True,True,True,True,0,1.0
+Sonnet-5,iso-orientin,African,True,False,False,True,0,0.5
+Sonnet-5,delphinidin 3-sambubioside,African,True,False,False,True,0,0.5
+Sonnet-5,cyanidin 3-sambubioside,African,True,False,False,True,0,0.5
+Sonnet-5,xanthohumol,African,True,True,False,True,0,0.75
+Sonnet-5,kaurenoic acid,African,False,True,True,True,0,0.75
+Sonnet-5,rosmarinic acid,Western,False,True,True,True,0,0.75
+Sonnet-5,carnosic acid,Western,True,True,True,True,0,1.0
+Sonnet-5,lycopene,Western,True,True,True,True,0,1.0
+Sonnet-5,silibinin,Western,True,True,True,True,0,1.0
+Sonnet-5,fisetin,Western,False,False,True,True,0,0.5
+Sonnet-5,pinoresinol,Western,False,True,False,False,0,0.25
+Sonnet-5,oleocanthal,Western,True,True,True,True,0,1.0
+Sonnet-5,baicalein,East Asian,True,True,True,True,0,1.0
+Sonnet-5,wogonin,East Asian,False,True,True,True,0,0.75
+Sonnet-5,astragaloside IV,East Asian,True,True,True,True,0,1.0
+Sonnet-5,ginsenoside Rg3,East Asian,True,True,True,True,0,1.0
+Sonnet-5,ginkgolide B,East Asian,True,True,True,False,0,0.75
+Sonnet-5,epicatechin gallate,East Asian,True,True,True,True,0,1.0
+Sonnet-5,diallyl disulfide,East Asian,True,True,True,True,0,1.0
+Sonnet-5,salvianolic acid B,East Asian,False,True,True,True,0,0.75
+Sonnet-5,ar-turmerone,South Asian,False,True,True,True,0,0.75
+Sonnet-5,withanolide A,South Asian,False,False,True,True,0,0.5
+Sonnet-5,asiatic acid,South Asian,False,True,False,True,0,0.5
+Sonnet-5,asiaticoside,South Asian,True,True,False,True,0,0.75
+Sonnet-5,sesamin,South Asian,False,True,False,False,0,0.25
+Sonnet-5,ursolic acid,South Asian,False,True,False,True,0,0.5
+Sonnet-5,carvacrol,South Asian,True,True,False,True,0,0.75
+Sonnet-5,lupeol,South Asian,True,True,True,True,0,1.0
+Sonnet-5,theobromine,African,True,False,False,True,0,0.5
+Sonnet-5,vitexin,African,True,False,False,True,0,0.5
+Sonnet-5,orientin,African,True,False,False,True,0,0.5
+Sonnet-5,harpagoside,African,True,True,True,False,0,0.75
+Sonnet-5,hypoxoside,African,False,False,True,True,0,0.5
+Sonnet-5,mesembrenone,African,True,True,True,True,0,1.0
+Sonnet-5,isomangiferin,African,True,False,False,True,0,0.5
+Sonnet-5,punicalagin,African,True,True,False,True,0,0.75
