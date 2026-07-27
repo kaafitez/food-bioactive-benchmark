@@ -1,0 +1,201 @@
+compound,stratum,provenance_note,source
+quercetin,Western,"It is found in many fruits, vegetables, leaves, seeds, and grains; capers, red onions, and kale are common foods containing appreciable amounts of it.",wikipedia
+kaempferol,Western,"Kaempferol (3,4′,5,7-tetrahydroxyflavone) is a natural flavonol, a type of flavonoid, found in a variety of plants and plant-derived foods, including kale, beans, tea, spinach, and broccoli.",wikipedia
+myricetin,Western,"Common dietary sources include vegetables, fruits, nuts, berries, tea, and red wine.",wikipedia
+apigenin,Western,"Apigenin (4′,5,7-trihydroxyflavone), found in many plants, is a flavone compound that is the aglycone of several naturally occurring glycosides.",wikipedia
+luteolin,Western,"Found in Inula montana, Cicerbita plumieri, Ocimum americanum, Capsicum annuum, Aspalathus linearis, Parkinsonia aculeata.",wikidata
+resveratrol,Western,"Sources of resveratrol in food include the skin of grapes, blueberries, raspberries, mulberries, and peanuts.",wikipedia
+caffeic acid,Western,"Caffeic acid is found in all plants as an intermediate in the biosynthesis of lignin, a naturally occurring complex carbohydrate representing the principal components of biomass and its residues.",wikipedia
+chlorogenic acid,Western,"Found in Fragaria, Prunus armeniaca, Prunus avium, Calendula officinalis, Sarcandra glabra, Cynara cardunculus.",wikidata
+ferulic acid,Western,"Esters of ferulic acid are found in plant cell walls, covalently bonded to hemicellulose such as arabinoxylans.",wikipedia
+ellagic acid,Western,Ellagic acid is a polyphenol found in numerous fruits and vegetables.,wikipedia
+naringenin,Western,"Found in Capsicum annuum, Fragaria, Commiphora wightii, Combretum imberbe, Magnolia liliiflora, Maclura pomifera.",wikidata
+hesperetin,Western,"Found in Capsicum annuum, Fragaria, Cocos nucifera, parsley, pomegranate, Prunus persica.",wikidata
+cyanidin,Western,"Found in berries, red cabbage.",csv_fallback
+delphinidin,Western,"Found in blueberry, blackcurrant.",csv_fallback
+oleuropein,Western,"Found in Olea europaea, Fraxinus excelsior, borage, Brassica napus, Inga feuilleei, Syringa josikaea.",wikidata
+hydroxytyrosol,Western,"Found in Vitis vinifera, Brassica napus, Papaver rhoeas, Ligustrum lucidum, Olea europaea, Fraxinus americana.",wikidata
+pterostilbene,Western,"Found in Vitis vinifera, Vitis rupestris, Coffea, Vitis, Pterocarpus macrocarpus, Vitis vulpina.",wikidata
+gallic acid,Western,"Found in Eucalyptus globulus, Rhus coriaria, Fragaria, Ampelopsis japonica, Melaleuca ericifolia, Mangifera indica.",wikidata
+genistein,East Asian,"Found in Capsicum annuum, soybean, Acacia calamifolia, Acacia constablei, Acacia chrysotricha, maize.",wikidata
+daidzein,East Asian,"Found in soybean, Pueraria montana var. thomsonii, Vigna radiata var. radiata, Streptomyces olivaceus, Capsicum annuum, Mirabilis jalapa.",wikidata
+allicin,East Asian,"Found in Allium sativum, Welsh onion, onion, Allium schoenoprasum, Allium ursinum, Allium victorialis.",wikidata
+epigallocatechin gallate,East Asian,"Found in Fragaria, Capsicum annuum, Camellia irrawadiensis, Sedum crassularia, Coccoloba mollis, Pisum sativum.",wikidata
+theaflavin,East Asian,"Theaflavin (TF) and its derivatives, known collectively as theaflavins, are polyphenols that are formed from the condensation of flavan-3-ols in tea leaves during the enzymatic oxidation of black tea.",wikipedia
+berberine,East Asian,"Found in Papaver somniferum, Artemisia maritima, Papaver rhoeas, Thalictrum calabricum, Thalictrum lankesteri, Thalictrum dasycarpum.",wikidata
+honokiol,East Asian,"Honokiol is a lignan isolated from the bark, seed cones, and leaves of trees belonging to the genus Magnolia.",wikipedia
+tanshinone IIA,East Asian,These compounds are all naturally occurring and can all be isolated from Salvia miltiorrhiza.,wikipedia
+ginsenoside Rb1,East Asian,Found in ginseng root.,csv_fallback
+ginsenoside Rg1,East Asian,"Compounds in this family are found almost exclusively in the plant genus Panax (ginseng), which has a long history of use in traditional medicine that has led to the study of pharmacological effects of ginseng compounds.",wikipedia
+6-gingerol,East Asian,Gingerol ([6]-gingerol) is a phenolic phytochemical compound found in fresh ginger that activates heat receptors on the tongue.,wikipedia
+nobiletin,East Asian,Nobiletin is a flavonoid isolated from citrus peels.,wikipedia
+tangeretin,East Asian,Tangeretin is an O-polymethoxylated flavone that is found in tangerine and other citrus peels.,wikipedia
+schisandrin A,East Asian,Found in Schisandra chinensis berry.,csv_fallback
+icariin,East Asian,"Found in Campanula medium, Berberidaceae, Epimedium, Epimedium brevicornu, Epimedium truncatum, Epimedium sutchuenense.",wikidata
+sulforaphane,East Asian,"Found in broccoli, cruciferous vegetables.",csv_fallback
+puerarin,East Asian,"Found in Pueraria, Trifolium pratense, Scutellaria baicalensis, Bupleurum chinense, Clematis hexapetala, Pueraria tuberosa.",wikidata
+curcumin,South Asian,"Found in ginger, Zingiberaceae, liquorice, Curcuma longa, Zingiber zerumbet, Curcuma zedoaria.",wikidata
+demethoxycurcumin,South Asian,Found in turmeric.,csv_fallback
+bisdemethoxycurcumin,South Asian,"Found in Curcuma longa, Curcuma zedoaria, Zingiber zerumbet, Alpinia galanga, Curcuma aromatica.",wikidata
+piperine,South Asian,"Found in Capsicum annuum, pomegranate, betel, black pepper, Piper cubeba, Piper longum.",wikidata
+withaferin A,South Asian,Found in ashwagandha (Withania somnifera).,csv_fallback
+andrographolide,South Asian,"Found in Biancaea decapetala, Andrographis paniculata, Cymbopogon schoenanthus.",wikidata
+bacoside A,South Asian,Found in Bacopa monnieri (brahmi).,csv_fallback
+gymnemic acid I,South Asian,Found in Gymnema sylvestre.,csv_fallback
+boswellic acid,South Asian,Found in Boswellia serrata (frankincense).,csv_fallback
+guggulsterone,South Asian,Found in Commiphora mukul (guggul).,csv_fallback
+forskolin,South Asian,"Found in Plectranthus barbatus, Plectranthus.",wikidata
+thymoquinone,South Asian,Found in black cumin (Nigella sativa).,csv_fallback
+eugenol,South Asian,"Found in Prunus persica, Zingiber mioga, Agastache foeniculum, tomato, Boronia megastigma, Callicarpa japonica.",wikidata
+mangiferin,South Asian,"Found in Anemarrhena asphodeloides, Aphloia theiformis, Anacardiaceae, Cyclopia sessiliflora, Cyclopia falcata, Cyclopia genistoides.",wikidata
+gallocatechin,South Asian,"Found in areca, tea.",csv_fallback
+azadirachtin,South Asian,"Found in Azadirachta, Azadirachta indica, Penicillium.",wikidata
+embelin,South Asian,"Found in Lysimachia punctata, Ardisia crenata, Embelia schimperi, Embelia tsjeriam-cottam, Ardisia oxyphylla, Myrsine umbellata.",wikidata
+aspalathin,African,Found in Aspalathus linearis.,wikidata
+nothofagin,African,Found in Aspalathus linearis.,wikidata
+kolaviron,African,Found in bitter kola (Garcinia kola).,csv_fallback
+6-paradol,African,Found in grains of paradise (Aframomum melegueta).,csv_fallback
+6-shogaol,African,"Found in grains of paradise, ginger.",csv_fallback
+mesembrine,African,Found in kanna (Sceletium tortuosum).,csv_fallback
+catechin,African,"Found in kola nut, marula, cocoa.",csv_fallback
+hydroxycitric acid,African,"Found in Garcinia gummi-gutta, Hibiscus sabdariffa, Garcinia hanburyi, Garcinia atroviridis, Garcinia cowa.",wikidata
+epicatechin,African,"Found in cocoa, kola nut.",csv_fallback
+caffeine,African,"Found in pomegranate, cacao, Coffea canephora, Coffea arabica, pomelo, house mouse.",wikidata
+gnetin C,African,Found in Gnetum.,csv_fallback
+mangiferin (honeybush),African,Found in honeybush (Cyclopia).,csv_fallback
+iso-orientin,African,Found in hibiscus roselle (Hibiscus sabdariffa).,csv_fallback
+delphinidin 3-sambubioside,African,"Found in roselle (hibiscus, zobo bissap).",csv_fallback
+cyanidin 3-sambubioside,African,Found in roselle (hibiscus).,csv_fallback
+xanthohumol,African,"Found in Capsicum annuum, Humulus lupulus.",wikidata
+kaurenoic acid,African,Found in Xylopia aethiopica (grains of Selim).,csv_fallback
+rosmarinic acid,Western,"Rosmarinic acid, named after rosemary, is a polyphenol constituent of many culinary herbs, including rosemary, perilla, sage, mint, and basil.",wikipedia
+carnosic acid,Western,Carnosic acid is a natural benzenediol abietane diterpene found in rosemary and common.,wikipedia
+lycopene,Western,Lycopene is a bright red carotenoid hydrocarbon found in tomatoes and other red fruits and vegetables.,wikipedia
+silibinin,Western,Found in milk thistle seed.,csv_fallback
+fisetin,Western,"It is found in many fruits and vegetables, such as strawberries, apples, persimmons, onions, and cucumbers.",wikipedia
+pinoresinol,Western,"Pinoresinol is a tetrahydrofuran lignan found in Styrax sp., Forsythia suspensa, and in Forsythia koreana.",wikipedia
+oleocanthal,Western,"Oleocanthal is a phenylethanoid, or a type of natural phenolic compound found in extra-virgin olive oil.",wikipedia
+baicalein,East Asian,"Baicalein (5,6,7-trihydroxyflavone) is a flavone, a type of flavonoid, originally isolated from the roots of Scutellaria baicalensis and Scutellaria lateriflora.",wikipedia
+wogonin,East Asian,"Wogonin is an O-methylated flavone, a flavonoid-like chemical compound which is found in Scutellaria baicalensis.",wikipedia
+astragaloside IV,East Asian,Found in Astragalus membranaceus (TCM).,csv_fallback
+ginsenoside Rg3,East Asian,Found in ginseng (red).,csv_fallback
+ginkgolide B,East Asian,Found in Ginkgo biloba.,csv_fallback
+epicatechin gallate,East Asian,Found in green tea.,csv_fallback
+diallyl disulfide,East Asian,Found in garlic.,csv_fallback
+salvianolic acid B,East Asian,Found in Salvia miltiorrhiza (Danshen).,csv_fallback
+ar-turmerone,South Asian,Found in turmeric.,csv_fallback
+withanolide A,South Asian,Found in ashwagandha (Withania).,csv_fallback
+asiatic acid,South Asian,"Found in pomegranate, Actinidia chinensis, Prunella vulgaris, Rosmarinus officinalis, Psidium guajava, Centella asiatica.",wikidata
+asiaticoside,South Asian,"Found in Centella asiatica, Akebia trifoliata, Heptapleurum heptaphyllum, Schefflera heptaphylla, Centella erecta.",wikidata
+sesamin,South Asian,"Found in Ginkgo biloba, Eucalyptus, Cinnamomum camphora, Piper longum, Magnolia kobus, Artemisia sieversiana.",wikidata
+ursolic acid,South Asian,"Found in pomegranate, Rhododendron tschonoskii, Rhododendron brachycarpum, Stachys chinensis, Clinopodium vulgare, Monotropa hypopitys.",wikidata
+carvacrol,South Asian,"Found in maize, Cupressus torulosa, Thymus thracicus, Origanum onites, Monarda punctata, Lippia graveolens.",wikidata
+lupeol,South Asian,"Found in Asclepias subulata, Phyllanthus emblica, Sorbus americana, Halothamnus somalensis, Clintonia borealis, potato.",wikidata
+theobromine,African,"Found in pomelo, cacao, Camellia sinensis, Coffea arabica, yerba mate, Camellia japonica.",wikidata
+vitexin,African,"Found in soybean, Cucumis sativus, Rumex acetosa, Crataegus microphylla, Lupinus texensis, Ephedra equisetina.",wikidata
+orientin,African,"Found in Centaurea gigantea, Verbena officinalis, Passiflora incarnata, Fagopyrum esculentum, Nelumbo nucifera, Cucumis sativus.",wikidata
+harpagoside,African,"Found in Melittis melissophyllum, Scrophularia nodosa, Lamium album, Verbascum lychnitis, Verbascum blattaria, Verbascum phlomoides.",wikidata
+hypoxoside,African,Found in potato (Hypoxis).,csv_fallback
+mesembrenone,African,Found in Sceletium tortuosum (kanna).,csv_fallback
+isomangiferin,African,"Found in Hypericum hirsutum, Hypericum tetrapterum, Hypericum calycinum, Anemarrhena asphodeloides, Hypericum montanum, Iris x germanica.",wikidata
+punicalagin,African,"Found in pomegranate, Combretum aculeatum, Terminalia chebula.",wikidata
+taxifolin,Western,"Taxifolin (5,7,3',4'-flavan-on-ol), also known as dihydroquercetin, belongs to the subclass flavanonols in the flavonoids, which in turn is a class of polyphenols.",wikipedia
+phloretin,Western,It can be found in apple tree leaves and the Manchurian apricot.,wikipedia
+phloridzin,Western,"Phlorizin is a glucoside of phloretin, a dihydrochalcone.",wikipedia
+sinapic acid,Western,"Sinapinic acid, or sinapic acid is an organic compound with the formula (CH3O)2(HO)C6H2CH=CHCO2H. It is naturally occurring hydroxycinnamic acid.",wikipedia
+p-coumaric acid,Western,p-Coumaric acid is an organic compound with the formula HOC6H4CH=CHCO2H.,wikipedia
+protocatechuic acid,Western,"Found in green tea, and in many fruits and vegetables.",curated
+syringic acid,Western,Syringic acid is a naturally occurring phenolic compound and dimethoxybenzene that is commonly found as a plant metabolite.,wikipedia
+vanillic acid,Western,Vanillic acid is a dihydroxybenzoic acid derivative used as a flavoring agent.,wikipedia
+secoisolariciresinol,Western,Secoisolariciresinol is an organic compound.,wikipedia
+matairesinol,Western,Matairesinol is an organic compound.,wikipedia
+malvidin,Western,"Malvidin is an O-methylated anthocyanidin, the 3',5'-methoxy derivative of delphinidin.",wikipedia
+peonidin,Western,"Peonidin is an O-methylated anthocyanidin derived from Cyanidin, and a primary plant pigment.",wikipedia
+petunidin,Western,"Petunidin (Pt), like Europinidin and Malvidin, is derived from Delphinidin and is an O-methylated anthocyanidin of the 3-hydroxy type.",wikipedia
+pelargonidin,Western,"Pelargonidin is an anthocyanidin, a type of plant pigment producing a characteristic orange color used in food and industrial dyes.",wikipedia
+procyanidin B2,Western,Procyanidin B2 is a B type proanthocyanidin.,wikipedia
+tyrosol,Western,Tyrosol is an organic compound with the formula HOC6H4CH2CH2OH.,wikipedia
+maslinic acid,Western,Maslinic acid is a compound derived from dry olive-pomace oil which is a byproduct of olive oil extraction.,wikipedia
+oleanolic acid,Western,Oleanolic acid or oleanic acid is a naturally occurring pentacyclic triterpenoid related to betulinic acid.,wikipedia
+betulinic acid,Western,"It is found in the bark of several species of plants, principally the white birch from which it gets its name, same as the bracket fungus Fomitopsis betulina, but also the ber tree, selfheal, the tropical carnivorous plants Triphyophyllum peltatum",wikipedia
+scopoletin,Western,"Found in Arracacia tolucensis, Acacia ehrenbergiana, Metrodorea nigra, Withania somnifera, Solanum crispum, Simira williamsii.",wikidata
+esculetin,Western,"Found in Asteraceae, Withania somnifera, Geum rivale, Prangos, Olea capensis, Olea woodiana.",wikidata
+umbelliferone,Western,"Found in Arracacia tolucensis, Acacia ehrenbergiana, Metrodorea nigra, Matricaria chamomilla, Prangos.",wikidata
+isoquercitrin,Western,"Found in Reynoutria sachalinensis, Dysphania botrys, Trifolium repens, Lonicera japonica, Acmella ciliata, Astragalus bornmuellerianus.",wikidata
+rutin,Western,"Found in Chimarrhis turbinata, Syzygium jambos, Humulus lupulus, Hypericum perforatum, Ocimum gratissimum, Picea abies.",wikidata
+hesperidin,Western,Found in citrus.,curated
+neohesperidin,East Asian,Found in citrus.,curated
+narirutin,East Asian,Found in citrus.,curated
+sinensetin,East Asian,Found in citrus.,curated
+oroxylin A,East Asian,Found in Scutellaria.,curated
+scutellarin,East Asian,Found in Erigeron.,curated
+paeoniflorin,East Asian,Found in peony root.,curated
+gastrodin,East Asian,Found in Gastrodia.,curated
+ginsenoside Re,East Asian,Found in ginseng.,curated
+ginsenoside Rd,East Asian,Found in ginseng.,curated
+calycosin,East Asian,Found in Astragalus.,curated
+formononetin,East Asian,"Found in Astragalus, soy.",curated
+ononin,East Asian,Found in Astragalus.,curated
+tetrahydropalmatine,East Asian,Found in Corydalis.,curated
+sinomenine,East Asian,Found in Sinomenium.,curated
+matrine,East Asian,Found in Sophora.,curated
+oxymatrine,East Asian,Found in Sophora.,curated
+emodin,East Asian,Found in rhubarb.,curated
+rhein,East Asian,Found in rhubarb.,curated
+chrysophanol,East Asian,Found in rhubarb.,curated
+magnolol,East Asian,Found in magnolia bark.,curated
+costunolide,East Asian,Found in costus.,curated
+shikonin,East Asian,Found in Lithospermum.,curated
+cryptotanshinone,East Asian,Found in Salvia miltiorrhiza.,curated
+liquiritigenin,East Asian,Found in licorice.,curated
+isoliquiritigenin,East Asian,Found in licorice.,curated
+piperlongumine,South Asian,Found in long pepper.,curated
+calebin A,South Asian,Found in turmeric.,curated
+bacopaside I,South Asian,Found in Bacopa monnieri.,curated
+bacopaside II,South Asian,Found in Bacopa monnieri.,curated
+withanoside IV,South Asian,Found in ashwagandha.,curated
+gymnemagenin,South Asian,Found in Gymnema sylvestre.,curated
+acetyl-11-keto-beta-boswellic acid,South Asian,Found in Boswellia serrata.,curated
+nimbin,South Asian,Found in neem.,curated
+nimbolide,South Asian,Found in neem.,curated
+gedunin,South Asian,Found in neem.,curated
+picroside I,South Asian,Found in Picrorhiza kurroa.,curated
+picroside II,South Asian,Found in Picrorhiza kurroa.,curated
+neoandrographolide,South Asian,Found in Andrographis paniculata.,curated
+sesamol,South Asian,Found in sesame.,curated
+sesamolin,South Asian,Found in sesame.,curated
+anethole,South Asian,"Found in Monopteryx uaucu, Baccharis dracunculifolia, Diplotaxis harra, Erucaria microcarpa, clove, Zanthoxylum schinifolium.",wikidata
+solasodine,South Asian,"Found in Solanum mauritianum, Fritillaria camtschatcensis, Solanum abutiloides, Solanum aculeatissimum, Solanum aviculare, Solanum umbelliferum.",wikidata
+corosolic acid,South Asian,"Found in Prunella vulgaris, Isodon henryi, common myrtle, Chaenomeles sinensis, Dracocephalum kotschyi, Melaleuca leucadendra.",wikidata
+mahanimbine,South Asian,"Found in Clausena excavata, Murraya siamensis, Murraya euchrestifolia, Murraya koenigii.",wikidata
+karanjin,South Asian,"Found in Fordia cauliflora, Dahlstedtia pentaphylla, Lonchocarpus heptaphyllus, Millettia leucantha, Millettia pulchra, Tephrosia purpurea.",wikidata
+tinosporaside,South Asian,Found in Tinospora cordifolia.,curated
+guggulsterone E,South Asian,Found in guggul.,curated
+shatavarin IV,South Asian,Found in Asparagus racemosus.,curated
+plumbagin,South Asian,Found in Plumbago.,curated
+isovitexin,African,"Found in rooibos, millet.",curated
+bergenin,African,"Found in Bergenia, Ardisia and Mallotus species.",curated
+eriodictyol,African,Found in rooibos.,curated
+chrysoeriol,African,Found in rooibos.,curated
+hyperoside,African,Found in sorghum and in Hypericum and Crataegus species.,curated
+epigallocatechin,African,Found in kola nut.,curated
+garcinol,African,Found in bitter kola.,curated
+5-hydroxytryptophan,African,"5-Hydroxytryptophan (5-HTP), used medically as oxitriptan, is a naturally occurring amino acid and chemical precursor as well as a metabolic intermediate in the biosynthesis of the neurotransmitter serotonin.",wikipedia
+ibogaine,African,"Ibogaine is a psychoactive indole alkaloid derived from plants such as Tabernanthe iboga, characterized by hallucinogenic and oneirogenic effects.",wikipedia
+yohimbine,African,"Yohimbine, also known as quebrachine, is an indole alkaloid derived from the bark of the plants tree Pausinystalia johimbe (yohimbe) and from the bark of the unrelated South plants tree Aspidosperma quebracho-blanco.",wikipedia
+harpagide,African,Found in devil's claw.,curated
+marrubiin,African,Found in Marrubium.,curated
+theophylline,African,"Trace amounts of theophylline are naturally present in tea, coffee, chocolate, yerba mate, guarana, and kola nut.",wikipedia
+cyanidin 3-glucoside,African,Chrysanthemin is an anthocyanin.,wikipedia
+gossypol,African,Gossypol is a natural phenol derived from the cotton plant.,wikipedia
+piceatannol,African,Piceatannol is the organic compound with the formula ( 2C6H3)2CH)2.,wikipedia
+cathinone,African,Found in khat.,curated
+voacangine,African,Found in Voacanga and Tabernanthe species.,curated
+catechin-7-O-glucoside,African,Found in sorghum.,curated
+taxifolin-7-glucoside,African,Found in rooibos.,curated
+luteolin-7-glucoside,African,"Found in celery, chamomile and various leafy herbs.",curated
+quercetin-3-glucoside,African,Found in hibiscus.,curated
+physcion,African,Found in rhubarb and Rumex species.,curated
+crocin,African,Found in saffron.,curated
+safranal,African,Found in saffron.,curated
+gymnemic acid II,South Asian,Found in Gymnema sylvestre.,curated
