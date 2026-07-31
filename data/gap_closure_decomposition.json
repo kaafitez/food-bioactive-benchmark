@@ -1,0 +1,49 @@
+{
+ "per_family": [
+  {
+   "family": "qwen2.5:32b",
+   "afr_rise": 0.085,
+   "wes_fall": 0.075,
+   "total_reduction": 0.16,
+   "pct_from_afr_rise": 53.125
+  },
+  {
+   "family": "llama3.1:8b",
+   "afr_rise": 0.1,
+   "wes_fall": 0.02,
+   "total_reduction": 0.12,
+   "pct_from_afr_rise": 83.333
+  },
+  {
+   "family": "llama3.1:70b",
+   "afr_rise": 0.15,
+   "wes_fall": 0.04,
+   "total_reduction": 0.19,
+   "pct_from_afr_rise": 78.947
+  },
+  {
+   "family": "gemma2:27b",
+   "afr_rise": 0.1,
+   "wes_fall": 0.02,
+   "total_reduction": 0.12,
+   "pct_from_afr_rise": 83.333
+  },
+  {
+   "family": "mixtral:8x7b",
+   "afr_rise": 0.08,
+   "wes_fall": 0.11,
+   "total_reduction": 0.19,
+   "pct_from_afr_rise": 42.105
+  },
+  {
+   "family": "claude(2-tier)",
+   "afr_rise": 0.215,
+   "wes_fall": -0.05,
+   "total_reduction": 0.165,
+   "pct_from_afr_rise": 130.303
+  }
+ ],
+ "pooled_african_rise": 0.122,
+ "pooled_western_fall": 0.036,
+ "pct_closure_from_african_rise": 77.0
+}
