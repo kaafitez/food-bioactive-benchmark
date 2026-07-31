@@ -97,30 +97,47 @@ ACC_CMAP = "viridis"
 # ----------------------------------------------------------------------------
 # DATA  — version ids resolved to local paths at runtime
 # ----------------------------------------------------------------------------
-DATA_DIR = os.environ.get("FIGDATA", "figdata")
+# Data-directory search path: works from the figure bundle (figdata/) AND from a
+# clone of the released repository (data/), so a reviewer can regenerate every
+# figure from a clean checkout with no edits. Override with FIGDATA=<dir>.
+DATA_DIRS = [os.environ["FIGDATA"]] if os.environ.get("FIGDATA") else \
+            ["figdata", "data", "../data", ".", "code/figdata"]
+# Each key lists accepted filenames in priority order (bundle name, then the
+# clean names used in the public repository).
 DATA = {
-    "bench100":   "benchmark100_scores_det.csv",
-    "ablation":   "ablation_scores_det.csv",
-    "compounds":  "compounds_200.csv",
-    "compounds100":"bioactive_benchmark_set.csv",
-    "crossfam":   "crossfamily_summary.csv",
-    "crossfam_stats":"crossfamily_stats.json",
-    "comparison": "compound_set_comparison.json",
-    "taskdecomp": "ablation_task_decomposition.json",
-    "gapclose":   "gap_closure_decomposition.json",
-    "hardened":   "hardened_stats.json",
-    "structure_probe": "structure_probe_results.csv",
+    "bench100":        ["benchmark100_scores_det.csv", "benchmark_scores.csv"],
+    "ablation":        ["ablation_scores_det.csv", "ablation_scores.csv"],
+    "compounds":       ["compounds_200.csv", "compounds.csv"],
+    "compounds100":    ["bioactive_benchmark_set.csv", "compounds.csv"],
+    "crossfam":        ["crossfamily_summary.csv"],
+    "crossfam_stats":  ["crossfamily_stats.json"],
+    "comparison":      ["compound_set_comparison.json"],
+    "taskdecomp":      ["ablation_task_decomposition.json"],
+    "gapclose":        ["gap_closure_decomposition.json"],
+    "hardened":        ["hardened_stats.json"],
+    "structure_probe": ["structure_probe_results.csv"],
 }
 OUT_DIR = "figures"
 
 
 def D(key):
-    """Load a data file (csv->DataFrame, json->dict)."""
-    path = os.path.join(DATA_DIR, DATA[key])
-    if path.endswith(".csv"):
-        return pd.read_csv(path)
-    with open(path) as f:
-        return json.load(f)
+    """Load a data file (csv->DataFrame, json->dict).
+
+    Searches DATA_DIRS for any of the accepted filenames for `key`, so the
+    script runs unchanged from the figure bundle (figdata/) or a clone of the
+    released repository (data/).
+    """
+    candidates = DATA[key] if isinstance(DATA[key], (list, tuple)) else [DATA[key]]
+    for d in DATA_DIRS:
+        for fname in candidates:
+            path = os.path.join(d, fname)
+            if os.path.exists(path):
+                if path.endswith(".csv"):
+                    return pd.read_csv(path)
+                with open(path) as f:
+                    return json.load(f)
+    raise FileNotFoundError(
+        f"data for '{key}' not found; looked for {candidates} in {DATA_DIRS}")
 
 
 def norm_stratum(s):
