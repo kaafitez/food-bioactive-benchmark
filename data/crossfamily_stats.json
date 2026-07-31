@@ -1,0 +1,81 @@
+{
+ "n_families": 6,
+ "n_labs": 5,
+ "labs": [
+  "Anthropic",
+  "Alibaba",
+  "Meta",
+  "Google",
+  "Mistral"
+ ],
+ "families": {
+  "Claude (2-tier)": {
+   "lab": "Anthropic",
+   "gap_A": 0.225,
+   "gap_B": 0.235,
+   "gap_C": 0.06,
+   "gap_D": 0.075,
+   "structure_effect": 0.01,
+   "provenance_effect": -0.165
+  },
+  "qwen2.5:32b": {
+   "lab": "Alibaba",
+   "gap_A": 0.35,
+   "gap_B": 0.36,
+   "gap_C": 0.18,
+   "gap_D": 0.2,
+   "structure_effect": 0.01,
+   "provenance_effect": -0.17
+  },
+  "llama3.1:8b": {
+   "lab": "Meta",
+   "gap_A": 0.25,
+   "gap_B": 0.25,
+   "gap_C": 0.18,
+   "gap_D": 0.15,
+   "structure_effect": 0.0,
+   "provenance_effect": -0.07
+  },
+  "llama3.1:70b": {
+   "lab": "Meta",
+   "gap_A": 0.28,
+   "gap_B": 0.29,
+   "gap_C": 0.14,
+   "gap_D": 0.14,
+   "structure_effect": 0.01,
+   "provenance_effect": -0.14
+  },
+  "gemma2:27b": {
+   "lab": "Google",
+   "gap_A": 0.24,
+   "gap_B": 0.29,
+   "gap_C": 0.15,
+   "gap_D": 0.16,
+   "structure_effect": 0.05,
+   "provenance_effect": -0.09
+  },
+  "mixtral:8x7b": {
+   "lab": "Mistral",
+   "gap_A": 0.15,
+   "gap_B": 0.1,
+   "gap_C": -0.05,
+   "gap_D": 0.0,
+   "structure_effect": -0.05,
+   "provenance_effect": -0.2
+  }
+ },
+ "meta": {
+  "provenance_closes_gap_all_families": true,
+  "provenance_effect_mean": -0.139,
+  "provenance_wilcoxon_p": 0.0312,
+  "structure_effect_mean": 0.005,
+  "structure_wilcoxon_p": 0.625
+ },
+ "llama_scale_trend": {
+  "baseline_gap_8b": 0.25,
+  "baseline_gap_70b": 0.28,
+  "overall_8b": 0.51,
+  "overall_70b": 0.6,
+  "note": "70B is more accurate than 8B but the baseline gap does NOT shrink with scale (0.25->0.28); provenance still needed. Matches Claude finding that scale does not close the gap."
+ }
+}
