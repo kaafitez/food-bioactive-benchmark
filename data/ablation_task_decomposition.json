@@ -1,0 +1,37 @@
+{
+ "per_task_across_6_families": {
+  "food": {
+   "gap_A": 0.307,
+   "gap_C": -0.093,
+   "reduction": 0.4,
+   "wilcoxon_p": 0.031,
+   "leak_prone": true,
+   "note": "provenance note names source foods -> partly answer-supply"
+  },
+  "cultural": {
+   "gap_A": 0.557,
+   "gap_C": 0.353,
+   "reduction": 0.203,
+   "wilcoxon_p": 0.062,
+   "leak_prone": "indirect",
+   "note": "culture/region NEVER named in note (leakage-audited) -> genuine inference from named foods"
+  },
+  "bioactivity": {
+   "gap_A": 0.057,
+   "gap_C": 0.013,
+   "reduction": 0.043,
+   "wilcoxon_p": 0.156,
+   "leak_prone": false,
+   "note": "note cannot leak class; baseline gap already small"
+  },
+  "bioavail": {
+   "gap_A": 0.073,
+   "gap_C": 0.09,
+   "reduction": -0.017,
+   "wilcoxon_p": 0.531,
+   "leak_prone": false,
+   "note": "note cannot leak tier; no gap to close"
+  }
+ },
+ "interpretation": "The Western-African gap is concentrated on the two documentation-dependent tasks (food-source, cultural-context), where baseline gaps are large (0.31, 0.56); on the two chemistry tasks the baseline gap is already near zero (0.06, 0.07). Provenance reduces the gap on the documentation tasks and does essentially nothing on the chemistry tasks. Part of the food-source gain is answer-supply (the note names foods), but the cultural-context gain is genuine inference: the note never names the culture or region (leakage-audited), so the model must infer cultural context from the named foods. This confirms the paper's thesis that the deficit is one of documentation coverage, not chemical reasoning."
+}
