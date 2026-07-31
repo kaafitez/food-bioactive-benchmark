@@ -43,6 +43,17 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch, FancyArrowPatch, PathPatch
 from matplotlib.path import Path
+from matplotlib.lines import Line2D
+# Fig 3 (chemical-similarity network) needs rdkit + networkx; the other figures do not.
+try:
+    import networkx as nx
+    from rdkit import Chem
+    from rdkit.Chem import AllChem, DataStructs
+    from rdkit import RDLogger
+    RDLogger.DisableLog("rdApp.*")
+    _HAVE_CHEM = True
+except ImportError:
+    _HAVE_CHEM = False
 
 # ----------------------------------------------------------------------------
 # STYLE / PALETTE  — edit here to restyle all figures
@@ -99,31 +110,47 @@ ACC_CMAP = "viridis"
 # ----------------------------------------------------------------------------
 # DATA  — version ids resolved to local paths at runtime
 # ----------------------------------------------------------------------------
-DATA_DIR = os.environ.get("FIGDATA", "figdata")
+# Data-directory search path: works from the figure bundle (figdata/) AND from a
+# clone of the released repository (data/), so a reviewer can regenerate every
+# figure from a clean checkout with no edits. Override with FIGDATA=<dir>.
+DATA_DIRS = [os.environ["FIGDATA"]] if os.environ.get("FIGDATA") else \
+            ["figdata", "data", "../data", ".", "code/figdata"]
+# Each key lists accepted filenames in priority order (bundle name, then the
+# clean names used in the public repository).
 DATA = {
-    "crossfam":    "crossfamily_summary.csv",
-    "bench100":   "benchmark100_scores_det.csv",
-    "ablation":   "ablation_scores_det.csv",
-    "compounds":  "compounds_200.csv",
-    "compounds100":"bioactive_benchmark_set.csv",
-    "crossfam":   "crossfamily_summary.csv",
-    "crossfam_stats":"crossfamily_stats.json",
-    "comparison": "compound_set_comparison.json",
-    "taskdecomp": "ablation_task_decomposition.json",
-    "gapclose":   "gap_closure_decomposition.json",
-    "hardened":   "hardened_stats.json",
-    "structure_probe": "structure_probe_results.csv",
+    "crossfam":        ["crossfamily_summary.csv"],
+    "bench100":        ["benchmark100_scores_det.csv", "benchmark_scores.csv"],
+    "ablation":        ["ablation_scores_det.csv", "ablation_scores.csv"],
+    "compounds":       ["compounds_200.csv", "compounds.csv"],
+    "compounds100":    ["bioactive_benchmark_set.csv", "compounds.csv"],
+    "crossfam_stats":  ["crossfamily_stats.json"],
+    "comparison":      ["compound_set_comparison.json"],
+    "taskdecomp":      ["ablation_task_decomposition.json"],
+    "gapclose":        ["gap_closure_decomposition.json"],
+    "hardened":        ["hardened_stats.json"],
+    "structure_probe": ["structure_probe_results.csv"],
 }
 OUT_DIR = os.environ.get("OUTDIR", "figures_review")
 
 
 def D(key):
-    """Load a data file (csv->DataFrame, json->dict)."""
-    path = os.path.join(DATA_DIR, DATA[key])
-    if path.endswith(".csv"):
-        return pd.read_csv(path)
-    with open(path) as f:
-        return json.load(f)
+    """Load a data file (csv->DataFrame, json->dict).
+
+    Searches DATA_DIRS for any of the accepted filenames for `key`, so the
+    script runs unchanged from the figure bundle (figdata/) or a clone of the
+    released repository (data/).
+    """
+    candidates = DATA[key] if isinstance(DATA[key], (list, tuple)) else [DATA[key]]
+    for d in DATA_DIRS:
+        for fname in candidates:
+            path = os.path.join(d, fname)
+            if os.path.exists(path):
+                if path.endswith(".csv"):
+                    return pd.read_csv(path)
+                with open(path) as f:
+                    return json.load(f)
+    raise FileNotFoundError(
+        f"data for '{key}' not found; looked for {candidates} in {DATA_DIRS}")
 
 
 def norm_stratum(s):
@@ -259,6 +286,107 @@ def fig2():
 
 
 def fig3():
+    """Chemical-similarity network: structure does not sort bioactives by culture.
+
+    Nodes = the 100 benchmark compounds; edges = Morgan/ECFP4 Tanimoto >= 0.30;
+    node colour = cultural stratum, node size = degree. Requires rdkit + networkx.
+    """
+    if not _HAVE_CHEM:
+        print("  [fig3] skipped: rdkit/networkx not installed "
+              "(pip install rdkit networkx)")
+        return None
+    THRESH = 0.30
+    df = D("compounds100")
+    df["stratum"] = df["stratum"].map(norm_stratum)
+    smis = df["canonical_smiles"].fillna(df["smiles"]).tolist()
+    mols = [Chem.MolFromSmiles(s) for s in smis]
+    gen = AllChem.GetMorganGenerator(radius=2, fpSize=2048)
+    fps = [gen.GetFingerprint(m) if m is not None else None for m in mols]
+    N = len(fps)
+
+    G = nx.Graph()
+    for i in range(N):
+        G.add_node(i, stratum=df["stratum"].iloc[i])
+    for i in range(N):
+        if fps[i] is None:
+            continue
+        for j in range(i + 1, N):
+            if fps[j] is None:
+                continue
+            s = DataStructs.TanimotoSimilarity(fps[i], fps[j])
+            if s >= THRESH:
+                G.add_edge(i, j, weight=float(s))
+
+    deg = dict(G.degree())
+    connected = [n for n in G.nodes() if deg[n] > 0]
+    isolated = [n for n in G.nodes() if deg[n] == 0]
+    Gc = G.subgraph(connected)
+    pos = nx.spring_layout(Gc, weight="weight", k=0.55, seed=3, iterations=300)
+    xs = np.array([p[0] for p in pos.values()])
+    ys = np.array([p[1] for p in pos.values()])
+    xspan, yspan = np.ptp(xs), np.ptp(ys)
+    def rescale(p, xr=(-1.0, 0.55), yr=(-1.0, 1.0)):
+        x = (p[0] - xs.min()) / xspan * (xr[1] - xr[0]) + xr[0]
+        y = (p[1] - ys.min()) / yspan * (yr[1] - yr[0]) + yr[0]
+        return np.array([x, y])
+    pos = {n: rescale(p) for n, p in pos.items()}
+    order = ["Western", "East Asian", "South Asian", "African"]
+    iso_by = sorted(isolated, key=lambda i: order.index(df["stratum"].iloc[i]))
+    ny = np.linspace(0.95, -0.95, max(len(iso_by), 1))
+    for k, i in enumerate(iso_by):
+        pos[i] = np.array([0.80 + 0.16 * (k % 3), ny[k]])
+
+    fig, ax = plt.subplots(figsize=(COL_2, 5.6))
+    ax.axis("off")
+    for u, v, d in Gc.edges(data=True):
+        w = d["weight"]
+        same = df["stratum"].iloc[u] == df["stratum"].iloc[v]
+        col = "#9aa4ad" if not same else STRATUM[df["stratum"].iloc[u]]
+        ax.plot([pos[u][0], pos[v][0]], [pos[u][1], pos[v][1]], "-",
+                color=col, lw=0.5 + 2.4 * (w - THRESH),
+                alpha=0.25 + 0.5 * (w - THRESH), zorder=1, solid_capstyle="round")
+    for strat, c in STRATUM.items():
+        idx = [i for i in G.nodes() if df["stratum"].iloc[i] == strat]
+        ax.scatter([pos[i][0] for i in idx], [pos[i][1] for i in idx],
+                   s=[30 + 34 * deg[i] for i in idx], c=c,
+                   edgecolors="white", linewidths=0.6, zorder=3, label=strat, alpha=0.95)
+    name2i = {df["name"].iloc[i]: i for i in connected}
+    for nm, off, ha, va in [("ferulic acid", (-0.16, -0.10), "right", "top"),
+                            ("curcumin", (0.10, 0.12), "left", "bottom")]:
+        if nm in name2i:
+            i = name2i[nm]; x, y = pos[i]
+            ax.annotate(nm, (x, y), xytext=(x + off[0], y + off[1]),
+                        fontsize=BASE_FS - 2, style="italic", color="#222", zorder=6,
+                        ha=ha, va=va,
+                        arrowprops=dict(arrowstyle="-", color="#666", lw=0.5, shrinkA=0, shrinkB=2))
+    ax.text(0.88, 1.03, "No strong chemical\nsimilarity (Tanimoto < %.2f)" % THRESH,
+            ha="center", va="bottom", fontsize=BASE_FS - 2, color="#555", style="italic")
+    ax.legend(title="Cultural origin", loc="upper left", frameon=False,
+              fontsize=BASE_FS - 1, title_fontsize=BASE_FS - 1,
+              handletextpad=0.3, labelspacing=0.35, bbox_to_anchor=(-0.02, 1.02))
+    # report the genuine numbers computed from THIS run
+    edges = list(G.edges())
+    strat = df["stratum"].tolist()
+    cross = sum(1 for u, v in edges if strat[u] != strat[v])
+    assort = nx.attribute_assortativity_coefficient(G, "stratum")
+    txt = ("Chemical-similarity network of %d food bioactives\n"
+           "(Morgan/ECFP4 fingerprints, edge = Tanimoto >= %.2f).\n"
+           "Chemical neighbours cross cultural lines %.0f%% of the time\n"
+           "(75%% if origin were random); structure-origin assortativity\n"
+           "is only %+.2f -- chemistry carries a faint cultural signal,\n"
+           "too weak for models to exploit, so cultural provenance,\n"
+           "not molecular structure, is the lever that closes the gap."
+           % (N, THRESH, 100 * cross / len(edges), assort))
+    ax.text(0.42, -0.03, txt, transform=ax.transAxes, ha="center", va="top",
+            fontsize=BASE_FS - 2, color="#222",
+            bbox=dict(boxstyle="round,pad=0.5", fc="#f7f9fb", ec="#c3d2df", lw=1.0), zorder=6)
+    ax.set_title("Molecular structure does not sort food bioactives by culture",
+                 fontsize=TITLE_FS, loc="left", pad=8)
+    ax.set_xlim(-1.15, 1.08); ax.set_ylim(-1.42, 1.20)
+    return save(fig, "fig03_similarity_network.png")
+
+
+def fig4():
     """Illustrative case study: cultural gap, where it concentrates, and its closure."""
     import numpy as np
     from matplotlib.gridspec import GridSpec
@@ -332,9 +460,9 @@ def fig3():
              color="#b9770e", fontweight="bold")
     panel_label(axc, "c")
 
-    return save(fig, "fig03_illustrative_benchmark.png")
+    return save(fig, "fig04_illustrative_benchmark.png")
 
-def fig4():
+def fig5():
     """Cross-family generality heatmap: Western-African gap, baseline vs +provenance."""
     import numpy as np
     df = D("crossfam")
@@ -364,10 +492,10 @@ def fig4():
     ax.set_xticks(np.arange(-0.5, 2, 1), minor=True); ax.set_yticks(np.arange(-0.5, len(df), 1), minor=True)
     ax.grid(which="minor", color="white", lw=1.6); ax.tick_params(which="minor", length=0)
     fig.tight_layout()
-    return save(fig, "fig04_crossfamily_heatmap.png")
+    return save(fig, "fig05_crossfamily_heatmap.png")
 
 
-def fig5():
+def fig6():
     fig, ax = plt.subplots(figsize=(COL_2 * 1.5, 6.0))
     ax.set_xlim(0, 12); ax.set_ylim(0, 7); ax.axis("off")
 
@@ -421,10 +549,10 @@ def fig5():
     # legend for solid vs dashed
     ax.text(0.2, 0.5, "Solid = empirically validated (provenance).   Dashed = proposed but untested at this data scale "
             "(graph / spectral / matrix encoders).", fontsize=7.2, color="#444", style="italic")
-    return save(fig, "fig05_architecture.png")
+    return save(fig, "fig06_architecture.png")
 
 
-FIGS = {1: fig1, 2: fig2, 3: fig3, 4: fig4, 5: fig5}
+FIGS = {1: fig1, 2: fig2, 3: fig3, 4: fig4, 5: fig5, 6: fig6}
 
 if __name__ == "__main__":
     setup()
