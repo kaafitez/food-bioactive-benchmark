@@ -1,0 +1,140 @@
+{
+ "by_condition": {
+  "A": {
+   "overall": 0.71,
+   "overall_ci": [
+    0.6775,
+    0.7425
+   ],
+   "western": 0.8,
+   "african": 0.575,
+   "gap": 0.2250000000000001,
+   "gap_ci": [
+    0.135,
+    0.30999999999999994
+   ]
+  },
+  "B": {
+   "overall": 0.72,
+   "overall_ci": [
+    0.68625,
+    0.75375
+   ],
+   "western": 0.82,
+   "african": 0.585,
+   "gap": 0.235,
+   "gap_ci": [
+    0.14500000000000002,
+    0.31999999999999995
+   ]
+  },
+  "C": {
+   "overall": 0.80125,
+   "overall_ci": [
+    0.77375,
+    0.82875
+   ],
+   "western": 0.85,
+   "african": 0.79,
+   "gap": 0.05999999999999994,
+   "gap_ci": [
+    -0.020000000000000018,
+    0.135
+   ]
+  },
+  "D": {
+   "overall": 0.80625,
+   "overall_ci": [
+    0.7775,
+    0.83375
+   ],
+   "western": 0.855,
+   "african": 0.78,
+   "gap": 0.07499999999999996,
+   "gap_ci": [
+    -0.0050000000000000044,
+    0.15500000000000003
+   ]
+  }
+ },
+ "african_provenance_effect": {
+  "A_mean": 0.575,
+  "C_mean": 0.79,
+  "wilcoxon_p_C_gt_A": 3.542172224105241e-06,
+  "n": 50
+ },
+ "stratum_pairwise_baseline": [
+  {
+   "pair": "Western vs East Asian",
+   "p_raw": 0.857547636496004,
+   "p_holm": 0.857547636496004,
+   "cliffs_delta": -0.0136
+  },
+  {
+   "pair": "Western vs South Asian",
+   "p_raw": 0.01196440523341862,
+   "p_holm": 0.02392881046683724,
+   "cliffs_delta": 0.1938
+  },
+  {
+   "pair": "Western vs African",
+   "p_raw": 1.202868967197603e-11,
+   "p_holm": 6.014344835988015e-11,
+   "cliffs_delta": 0.5309
+  },
+  {
+   "pair": "East Asian vs South Asian",
+   "p_raw": 0.005347033543808091,
+   "p_holm": 0.016041100631424273,
+   "cliffs_delta": 0.2142
+  },
+  {
+   "pair": "East Asian vs African",
+   "p_raw": 6.146209343157335e-13,
+   "p_holm": 3.687725605894401e-12,
+   "cliffs_delta": 0.5624
+  },
+  {
+   "pair": "South Asian vs African",
+   "p_raw": 1.82211369568833e-05,
+   "p_holm": 7.28845478275332e-05,
+   "cliffs_delta": 0.3352
+  }
+ ],
+ "main_benchmark": {
+  "n_compounds": 100,
+  "n_models": 4,
+  "overall": 0.73875,
+  "by_task": {
+   "bioactivity": 0.7025,
+   "food": 0.7875,
+   "cultural": 0.715,
+   "bioavail": 0.75
+  },
+  "by_model": {
+   "Haiku-4.5": 0.71,
+   "Sonnet-4.5": 0.7325,
+   "Opus-4.5": 0.7525,
+   "Sonnet-5": 0.76
+  },
+  "by_stratum": {
+   "Western": 0.815,
+   "East Asian": 0.825,
+   "South Asian": 0.7325,
+   "African": 0.5825
+  },
+  "western_african_gap": 0.23249999999999993,
+  "gap_ci": [
+   0.1725,
+   0.2925
+  ],
+  "mwu_p": 1.202868967197603e-11,
+  "per_tier_gap": {
+   "Haiku-4.5": 0.35,
+   "Sonnet-4.5": 0.27,
+   "Opus-4.5": 0.19000000000000006,
+   "Sonnet-5": 0.12
+  },
+  "grading": "deterministic token-overlap for food; exact-match for closed-vocab; LLM two-judge agreement reported as robustness check (haiku ablation 82%)"
+ }
+}
