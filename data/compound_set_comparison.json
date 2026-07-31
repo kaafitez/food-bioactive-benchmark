@@ -1,0 +1,82 @@
+{
+ "decision": "Report 200-compound set as primary; 100-set stability cited as robustness.",
+ "rationale": "At n=50/stratum the main Western-African gap is unchanged from n=25 (gaps within +/-0.03 for every family) but the previously-underpowered African within-compound provenance gain (A->C) becomes significant in ALL 5 families (p from 0.0003 to 0.017), whereas on the 100-set it was non-significant even for qwen (p=0.15). The expansion converts the secondary claim from suggestive to significant while leaving the primary claim intact.",
+ "n_per_stratum_100": 25,
+ "n_per_stratum_200": 50,
+ "pooled_baseline_gap_200": 0.253,
+ "pooled_baseline_gap_ci": [
+  0.21,
+  0.29
+ ],
+ "pooled_mwu_p": 4.91e-30,
+ "stratum_ordering_200": {
+  "Western": 0.633,
+  "East Asian": 0.615,
+  "South Asian": 0.493,
+  "African": 0.38
+ },
+ "meta_provenance_wilcoxon_p_200": 0.0625,
+ "meta_structure_wilcoxon_p_200": 0.6875,
+ "per_family": {
+  "qwen2.5:32b": {
+   "gap_A_100": 0.35,
+   "gap_A_200": 0.335,
+   "gap_C_100": 0.18,
+   "gap_C_200": 0.175,
+   "prov_reduction_pct_200": 48.0,
+   "structure_effect_200": -0.005,
+   "african_AtoC_p_100": 0.154,
+   "african_AtoC_p_200": 0.0119,
+   "african_A_200": 0.39,
+   "african_C_200": 0.475
+  },
+  "llama3.1:8b": {
+   "gap_A_100": 0.25,
+   "gap_A_200": 0.28,
+   "gap_C_100": 0.18,
+   "gap_C_200": 0.16,
+   "prov_reduction_pct_200": 43.0,
+   "structure_effect_200": 0.005,
+   "african_AtoC_p_100": null,
+   "african_AtoC_p_200": 0.0006,
+   "african_A_200": 0.315,
+   "african_C_200": 0.415
+  },
+  "llama3.1:70b": {
+   "gap_A_100": 0.28,
+   "gap_A_200": 0.3,
+   "gap_C_100": 0.14,
+   "gap_C_200": 0.11,
+   "prov_reduction_pct_200": 63.0,
+   "structure_effect_200": -0.01,
+   "african_AtoC_p_100": null,
+   "african_AtoC_p_200": 0.0003,
+   "african_A_200": 0.41,
+   "african_C_200": 0.56
+  },
+  "gemma2:27b": {
+   "gap_A_100": 0.24,
+   "gap_A_200": 0.21,
+   "gap_C_100": 0.15,
+   "gap_C_200": 0.09,
+   "prov_reduction_pct_200": 57.0,
+   "structure_effect_200": 0.025,
+   "african_AtoC_p_100": null,
+   "african_AtoC_p_200": 0.0051,
+   "african_A_200": 0.43,
+   "african_C_200": 0.53
+  },
+  "mixtral:8x7b": {
+   "gap_A_100": 0.15,
+   "gap_A_200": 0.14,
+   "gap_C_100": -0.05,
+   "gap_C_200": -0.05,
+   "prov_reduction_pct_200": 136.0,
+   "structure_effect_200": -0.06,
+   "african_AtoC_p_100": null,
+   "african_AtoC_p_200": 0.0166,
+   "african_A_200": 0.355,
+   "african_C_200": 0.435
+  }
+ }
+}
