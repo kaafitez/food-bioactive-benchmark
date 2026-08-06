@@ -8,6 +8,9 @@ USAGE
     python make_review_figures.py         # regenerate all 4 figures into ./figures_review/
     python make_review_figures.py 3       # regenerate only Fig 3
 
+Requires: matplotlib, pandas, numpy. Fig 3 also uses rdkit + networkx + adjustText
+(pip install rdkit networkx adjustText); it degrades gracefully if adjustText is absent.
+
 This is ONE self-contained script: all 4 review figures (three schematics —
 graphical abstract, representation ladder, proposed architecture — plus one
 data figure, the illustrative case study) are defined here, so there is nothing
@@ -41,6 +44,10 @@ import numpy as np
 import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+
+def _title(obj, *a, **k):
+    """Gate a title/subtitle behind SHOW_TITLES."""
+    return obj.set_title(*a, **k) if SHOW_TITLES else None
 from matplotlib.patches import FancyBboxPatch, FancyArrowPatch, PathPatch
 from matplotlib.path import Path
 from matplotlib.lines import Line2D
@@ -54,15 +61,22 @@ try:
     _HAVE_CHEM = True
 except ImportError:
     _HAVE_CHEM = False
+try:
+    from adjustText import adjust_text
+    _HAVE_ADJUSTTEXT = True
+except ImportError:
+    _HAVE_ADJUSTTEXT = False
 
 # ----------------------------------------------------------------------------
 # STYLE / PALETTE  — edit here to restyle all figures
 # ----------------------------------------------------------------------------
 DPI          = 300
-FONT         = "DejaVu Sans"      # swap to 'Arial'/'Helvetica' if installed
+FONT         = "Times New Roman"  # restyle: serif, per author spec
 BASE_FS      = 8.5                # base font size (pt)
 TITLE_FS     = 9.5
-PANEL_LAB_FS = 11                 # a/b/c panel letters
+PANEL_LAB_FS = 11
+PANEL_CASE   = "upper"   # "upper" -> A,B,C (user preference); "lower" -> a,b,c (Nature Portfolio house style)                 # a/b/c panel letters
+SHOW_TITLES  = False              # no in-figure titles/subtitles (captions carry them)
 COL_1        = 3.5                # single-column width (inches)
 COL_2        = 7.2                # double-column width (inches)
 
@@ -81,10 +95,10 @@ BAR_WIDTH    = 0.72              # default bar width where bars are drawn
 
 # Cultural strata — colourblind-safe (Okabe-Ito derived), NO alarm-red
 STRATUM = {
-    "Western":     "#0072B2",   # blue
-    "East Asian":  "#009E73",   # bluish-green
-    "South Asian": "#E69F00",   # orange
-    "African":     "#CC79A7",   # reddish-purple
+    "Western":     "#4878A8",   # dusty blue      (muted, pleasing)
+    "East Asian":  "#5B9279",   # muted teal-green
+    "South Asian": "#E0A458",   # warm sand
+    "African":     "#B5533D",   # muted brick (CVD-safe vs Western blue; was dusty rose #B0729A)
 }
 STRATUM_ORDER = ["Western", "East Asian", "South Asian", "African"]
 # short aliases used in some data files
@@ -101,7 +115,7 @@ MODEL = {
 MODEL_ORDER = ["Haiku-4.5", "Sonnet-4.5", "Opus-4.5", "Sonnet-5"]
 
 # Ablation grounding conditions
-COND = {"A": "#999999", "B": "#56B4E9", "C": "#E69F00", "D": "#009E73"}
+COND = {"A": "#9a9a9a", "B": "#4878A8", "C": "#E0A458", "D": "#5B9279"}
 COND_LABEL = {"A": "baseline", "B": "+structure", "C": "+provenance", "D": "both"}
 
 # Sequential colormap for accuracy heatmaps (perceptually uniform, CVD-safe)
@@ -129,6 +143,7 @@ DATA = {
     "gapclose":        ["gap_closure_decomposition.json"],
     "hardened":        ["hardened_stats.json"],
     "structure_probe": ["structure_probe_results.csv"],
+    "accuracy_ba":     ["model_accuracy_beforeafter.json"],
 }
 OUT_DIR = os.environ.get("OUTDIR", "figures_review")
 
@@ -176,6 +191,7 @@ def setup():
 
 
 def panel_label(ax, letter, dx=-0.02, dy=1.04):
+    letter = letter.upper() if PANEL_CASE == "upper" else letter.lower()
     ax.text(dx, dy, letter, transform=ax.transAxes, fontsize=PANEL_LAB_FS,
             fontweight="bold", va="bottom", ha="right")
 
@@ -193,17 +209,18 @@ def _light(hexc, f=0.80):
     r = int(r + (255 - r) * f); g = int(g + (255 - g) * f); b = int(b + (255 - b) * f)
     return f"#{r:02x}{g:02x}{b:02x}"
 
-NAVY = "#0a3d62"
+NAVY = "#1a1a1a"   # dark text accent (titles gated off)
 
 
 def fig1():
     """Graphical abstract framed as the review's argument: field -> three gaps -> path forward."""
     fig, ax = plt.subplots(figsize=(COL_2 * 1.5, 5.2))
     ax.set_xlim(0, 12); ax.set_ylim(0, 6.4); ax.axis("off")
-    ax.text(6, 6.05, "Food AI can taste, but it cannot yet reason about health",
-            fontsize=13.5, fontweight="bold", ha="center", color=NAVY)
-    ax.text(6, 5.62, "A review of language models for food, the gaps that remain, and a path toward bioactive-aware systems",
-            fontsize=9, ha="center", color="#555", style="italic")
+    if SHOW_TITLES:
+        ax.text(6, 6.05, "Food AI can taste, but it cannot yet reason about health",
+                fontsize=13.5, fontweight="bold", ha="center", color=NAVY)
+        ax.text(6, 5.62, "A review of language models for food, the gaps that remain, and a path toward bioactive-aware systems",
+                fontsize=9, ha="center", color="#555", style="italic")
 
     def box(x, y, w, h, txt, fc, ec, fs=8, bold=False, tc="#222"):
         ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0.03",
@@ -220,7 +237,7 @@ def fig1():
                                     (2.55,"Generative food & recipe design")]):
         box(0.3, yy, 3.5, 0.5, lab, "#e8f0f7", STRATUM["Western"], 7.5)
     box(0.3, 1.75, 3.5, 0.62, "Bioactive compounds that\ndetermine health: largely absent",
-        _light(STRATUM["African"], 0.78), STRATUM["African"], 7.8, bold=True, tc="#7a2f5c")
+        _light(STRATUM["African"], 0.78), STRATUM["African"], 7.8, bold=True, tc="#2b2b2b")
 
     ax.add_patch(FancyArrowPatch((3.95, 3.2), (4.6, 3.2), arrowstyle="-|>",
                  mutation_scale=18, color="#333", lw=2))
@@ -228,8 +245,8 @@ def fig1():
     # COLUMN 2 — the three organizing gaps (the review's synthesis)
     ax.text(6.5, 4.98, "THREE ORGANIZING GAPS", fontsize=8.3, fontweight="bold",
             color="#777", ha="center")
-    box(4.75, 4.2, 3.5, 0.66, "1  Bioactive chemistry\nis absent", "#fbeef4", STRATUM["African"], 7.8, bold=True, tc="#7a2f5c")
-    box(4.75, 3.42, 3.5, 0.66, "2  Structure treated\nas text, not a graph", "#eaf1fb", STRATUM["Western"], 7.8, bold=True, tc="#1f4e79")
+    box(4.75, 4.2, 3.5, 0.66, "1  Bioactive chemistry\nis absent", "#fbeef4", STRATUM["African"], 7.8, bold=True, tc="#2b2b2b")
+    box(4.75, 3.42, 3.5, 0.66, "2  Structure treated\nas text, not a graph", "#eaf1fb", STRATUM["Western"], 7.8, bold=True, tc="#2b2b2b")
     box(4.75, 2.64, 3.5, 0.66, "3  Culture measured for\ncuisines, not compounds", "#fff4e6", STRATUM["South Asian"], 7.8, bold=True, tc="#b9770e")
     ax.text(6.5, 2.28, "gaps 2 and 3 are downstream of gap 1", fontsize=6.6,
             ha="center", color="#888", style="italic")
@@ -241,11 +258,11 @@ def fig1():
     ax.text(10.35, 4.98, "A PATH FORWARD", fontsize=8.3, fontweight="bold",
             color="#777", ha="center")
     box(9.2, 4.05, 2.55, 0.8, "Provenance as a\nfirst-class input\n(retrieval-grounded)",
-        _light(STRATUM["East Asian"], 0.72), STRATUM["East Asian"], 7.4, bold=True, tc="#145a32")
+        _light(STRATUM["East Asian"], 0.72), STRATUM["East Asian"], 7.4, bold=True, tc="#2b2b2b")
     box(9.2, 3.05, 2.55, 0.8, "Molecular-graph &\nspectral encoders\n(next hypothesis)",
         "#eeeeee", "#999", 7.2, tc="#666")
     box(9.2, 2.05, 2.55, 0.8, "Bioactives as the\nobject of analysis",
-        "#eaf1fb", STRATUM["Western"], 7.4, bold=True, tc="#1f4e79")
+        "#eaf1fb", STRATUM["Western"], 7.4, bold=True, tc="#2b2b2b")
 
     # bottom strip — the one piece of illustrative evidence, clearly labelled as such
     ax.plot([0.35, 11.75], [1.5, 1.5], color="#ddd", lw=0.8)
@@ -259,8 +276,9 @@ def fig1():
 def fig2():
     fig, ax = plt.subplots(figsize=(COL_2, 3.6))
     ax.set_xlim(0, 10); ax.set_ylim(0, 6.2); ax.axis("off")
-    ax.text(5, 5.95, "The representation ladder for food bioactives", fontsize=TITLE_FS + 1,
-            fontweight="bold", ha="center", color=NAVY)
+    if SHOW_TITLES:
+        ax.text(5, 5.95, "The representation ladder for food bioactives", fontsize=TITLE_FS + 1,
+                fontweight="bold", ha="center", color=NAVY)
     rungs = [
         ("Compound name", "“curcumin”", "text token; what every food LLM uses", "#f2f2f2", "#999"),
         ("SMILES string", "COc1cc(...)", "text token sequence; structure implicit", "#e8f0f7", STRATUM["Western"]),
@@ -286,104 +304,113 @@ def fig2():
 
 
 def fig3():
-    """Chemical-similarity network: structure does not sort bioactives by culture.
+    """Structure does not sort food bioactives by culture (two-panel, no crowding).
 
-    Nodes = the 100 benchmark compounds; edges = Morgan/ECFP4 Tanimoto >= 0.30;
-    node colour = cultural stratum, node size = degree. Requires rdkit + networkx.
-    """
+    a: cultural composition of each broad chemical class (every class is a mix of origins).
+    b: pairwise Tanimoto similarity for same-culture vs different-culture compound pairs
+       (the two distributions nearly coincide, so structure barely encodes culture).
+    Replaces the earlier 100-node labelled network, which was inherently crowded; the
+    labelled class-grouped network is retained as a standalone talk asset
+    (fig3_similarity_network_byclass.png). Requires rdkit; scipy for the KDE."""
     if not _HAVE_CHEM:
-        print("  [fig3] skipped: rdkit/networkx not installed "
-              "(pip install rdkit networkx)")
+        print("  [fig3] skipped: rdkit/networkx not installed")
         return None
+    from scipy.stats import gaussian_kde
     THRESH = 0.30
     df = D("compounds100")
     df["stratum"] = df["stratum"].map(norm_stratum)
+
+    def family(cls):
+        c = str(cls).lower()
+        if any(k in c for k in ["flavon", "flavan", "anthocyan", "isoflav", "chalcone",
+                                 "catechin", "theaflavin", "biflavon"]): return "Flavonoids"
+        if "curcumin" in c or "diarylheptanoid" in c: return "Curcuminoids"
+        if "stilben" in c: return "Stilbenoids"
+        if any(k in c for k in ["hydroxycinnamic", "phenolic acid", "phenylpropanoid",
+                                 "phenylethanoid", "polyphenolic", "ellagitannin", "ellagi"]):
+            return "Phenolic acids / tannins"
+        if "lignan" in c: return "Lignans"
+        if any(k in c for k in ["triterpen", "saponin", "limonoid", "cycloartane", "dammarane"]):
+            return "Triterpenoids / saponins"
+        if any(k in c for k in ["diterpen", "abietane", "labdane", "kaurane"]): return "Diterpenoids"
+        if any(k in c for k in ["carotenoid", "monoterpen", "sesquiterpen"]): return "Other terpenoids"
+        if any(k in c for k in ["alkaloid", "purine", "piperidine", "isoquinoline", "sceletium"]):
+            return "Alkaloids"
+        if any(k in c for k in ["organosulfur", "isothiocyanate"]): return "Organosulfur"
+        return "Other"
+
+    df["family"] = df["compound_class"].map(family)
+    strata_order = ["Western", "East Asian", "South Asian", "African"]
+    M = pd.crosstab(df["family"], df["stratum"]).reindex(columns=strata_order, fill_value=0)
+    fam_order = list(M.sum(axis=1).sort_values(ascending=True).index)
+
+    # pairwise Tanimoto: same-culture vs cross-culture
     smis = df["canonical_smiles"].fillna(df["smiles"]).tolist()
     mols = [Chem.MolFromSmiles(s) for s in smis]
     gen = AllChem.GetMorganGenerator(radius=2, fpSize=2048)
     fps = [gen.GetFingerprint(m) if m is not None else None for m in mols]
-    N = len(fps)
-
-    G = nx.Graph()
-    for i in range(N):
-        G.add_node(i, stratum=df["stratum"].iloc[i])
-    for i in range(N):
-        if fps[i] is None:
-            continue
-        for j in range(i + 1, N):
-            if fps[j] is None:
-                continue
-            s = DataStructs.TanimotoSimilarity(fps[i], fps[j])
-            if s >= THRESH:
-                G.add_edge(i, j, weight=float(s))
-
-    deg = dict(G.degree())
-    connected = [n for n in G.nodes() if deg[n] > 0]
-    isolated = [n for n in G.nodes() if deg[n] == 0]
-    Gc = G.subgraph(connected)
-    pos = nx.spring_layout(Gc, weight="weight", k=0.55, seed=3, iterations=300)
-    xs = np.array([p[0] for p in pos.values()])
-    ys = np.array([p[1] for p in pos.values()])
-    xspan, yspan = np.ptp(xs), np.ptp(ys)
-    def rescale(p, xr=(-1.0, 0.55), yr=(-1.0, 1.0)):
-        x = (p[0] - xs.min()) / xspan * (xr[1] - xr[0]) + xr[0]
-        y = (p[1] - ys.min()) / yspan * (yr[1] - yr[0]) + yr[0]
-        return np.array([x, y])
-    pos = {n: rescale(p) for n, p in pos.items()}
-    order = ["Western", "East Asian", "South Asian", "African"]
-    iso_by = sorted(isolated, key=lambda i: order.index(df["stratum"].iloc[i]))
-    ny = np.linspace(0.95, -0.95, max(len(iso_by), 1))
-    for k, i in enumerate(iso_by):
-        pos[i] = np.array([0.80 + 0.16 * (k % 3), ny[k]])
-
-    fig, ax = plt.subplots(figsize=(COL_2, 5.6))
-    ax.axis("off")
-    for u, v, d in Gc.edges(data=True):
-        w = d["weight"]
-        same = df["stratum"].iloc[u] == df["stratum"].iloc[v]
-        col = "#9aa4ad" if not same else STRATUM[df["stratum"].iloc[u]]
-        ax.plot([pos[u][0], pos[v][0]], [pos[u][1], pos[v][1]], "-",
-                color=col, lw=0.5 + 2.4 * (w - THRESH),
-                alpha=0.25 + 0.5 * (w - THRESH), zorder=1, solid_capstyle="round")
-    for strat, c in STRATUM.items():
-        idx = [i for i in G.nodes() if df["stratum"].iloc[i] == strat]
-        ax.scatter([pos[i][0] for i in idx], [pos[i][1] for i in idx],
-                   s=[30 + 34 * deg[i] for i in idx], c=c,
-                   edgecolors="white", linewidths=0.6, zorder=3, label=strat, alpha=0.95)
-    name2i = {df["name"].iloc[i]: i for i in connected}
-    for nm, off, ha, va in [("ferulic acid", (-0.16, -0.10), "right", "top"),
-                            ("curcumin", (0.10, 0.12), "left", "bottom")]:
-        if nm in name2i:
-            i = name2i[nm]; x, y = pos[i]
-            ax.annotate(nm, (x, y), xytext=(x + off[0], y + off[1]),
-                        fontsize=BASE_FS - 2, style="italic", color="#222", zorder=6,
-                        ha=ha, va=va,
-                        arrowprops=dict(arrowstyle="-", color="#666", lw=0.5, shrinkA=0, shrinkB=2))
-    ax.text(0.88, 1.03, "No strong chemical\nsimilarity (Tanimoto < %.2f)" % THRESH,
-            ha="center", va="bottom", fontsize=BASE_FS - 2, color="#555", style="italic")
-    ax.legend(title="Cultural origin", loc="upper left", frameon=False,
-              fontsize=BASE_FS - 1, title_fontsize=BASE_FS - 1,
-              handletextpad=0.3, labelspacing=0.35, bbox_to_anchor=(-0.02, 1.02))
-    # report the genuine numbers computed from THIS run
-    edges = list(G.edges())
     strat = df["stratum"].tolist()
-    cross = sum(1 for u, v in edges if strat[u] != strat[v])
-    assort = nx.attribute_assortativity_coefficient(G, "stratum")
-    txt = ("Chemical-similarity network of %d food bioactives\n"
-           "(Morgan/ECFP4 fingerprints, edge = Tanimoto >= %.2f).\n"
-           "Chemical neighbours cross cultural lines %.0f%% of the time\n"
-           "(75%% if origin were random); structure-origin assortativity\n"
-           "is only %+.2f -- chemistry carries a faint cultural signal,\n"
-           "too weak for models to exploit, so cultural provenance,\n"
-           "not molecular structure, is the lever that closes the gap."
-           % (N, THRESH, 100 * cross / len(edges), assort))
-    ax.text(0.42, -0.03, txt, transform=ax.transAxes, ha="center", va="top",
-            fontsize=BASE_FS - 2, color="#222",
-            bbox=dict(boxstyle="round,pad=0.5", fc="#f7f9fb", ec="#c3d2df", lw=1.0), zorder=6)
-    ax.set_title("Molecular structure does not sort food bioactives by culture",
-                 fontsize=TITLE_FS, loc="left", pad=8)
-    ax.set_xlim(-1.15, 1.08); ax.set_ylim(-1.42, 1.20)
+    same_c, cross_c = [], []
+    for a in range(len(fps)):
+        if fps[a] is None:
+            continue
+        for b in range(a + 1, len(fps)):
+            if fps[b] is None:
+                continue
+            t = DataStructs.TanimotoSimilarity(fps[a], fps[b])
+            (same_c if strat[a] == strat[b] else cross_c).append(t)
+    same_c = np.array(same_c); cross_c = np.array(cross_c)
+
+    fig, (axA, axB) = plt.subplots(1, 2, figsize=(COL_2, COL_2 * 0.49),
+                                   gridspec_kw={"width_ratios": [1.15, 1.0]})
+    # panel a: stacked cultural composition
+    y = np.arange(len(fam_order)); left = np.zeros(len(fam_order))
+    for s in strata_order:
+        vals = M.reindex(fam_order)[s].values
+        axA.barh(y, vals, left=left, color=STRATUM[s], edgecolor="white",
+                 linewidth=0.6, label=s, height=0.74)
+        left = left + vals
+    axA.set_yticks(y); axA.set_yticklabels(fam_order, fontsize=BASE_FS - 2.3)
+    axA.set_xlabel("Number of compounds", fontsize=BASE_FS - 1)
+    axA.set_xlim(0, max(35, int(M.sum(axis=1).max()) + 1))
+    axA.legend(fontsize=BASE_FS - 2.7, loc="lower right", frameon=False,
+               title="Cultural origin", title_fontsize=BASE_FS - 2.3,
+               handlelength=1.0, labelspacing=0.3)
+    for sp in ["top", "right"]:
+        axA.spines[sp].set_visible(False)
+    axA.text(-0.02, 1.04, "A" if PANEL_CASE=="upper" else "a", transform=axA.transAxes, fontsize=PANEL_LAB_FS,
+             fontweight="bold", va="bottom", ha="right")
+
+    # panel b: same vs cross culture similarity KDE
+    xs = np.linspace(0, 0.8, 200)
+    ks, kc = gaussian_kde(same_c), gaussian_kde(cross_c)
+    axB.fill_between(xs, kc(xs), color="#c4c4c4", alpha=0.9, lw=0,
+                     label="Different culture (n=%d)" % len(cross_c))
+    axB.plot(xs, ks(xs), color="#1a1a1a", lw=1.7,
+             label="Same culture (n=%d)" % len(same_c))
+    axB.axvline(cross_c.mean(), color="#888", ls=(0, (4, 2)), lw=0.9)
+    axB.axvline(same_c.mean(), color="#1a1a1a", ls=(0, (4, 2)), lw=0.9)
+    ymax = float(kc(xs).max())
+    axB.annotate("mean %.2f" % same_c.mean(),
+                 xy=(float(same_c.mean()), float(np.atleast_1d(ks(same_c.mean()))[0])),
+                 xytext=(0.37, ymax * 0.82), fontsize=BASE_FS - 2.5, color="#1a1a1a",
+                 arrowprops=dict(arrowstyle="-", color="#1a1a1a", lw=0.6))
+    axB.annotate("mean %.2f" % cross_c.mean(),
+                 xy=(float(cross_c.mean()), float(np.atleast_1d(kc(cross_c.mean()))[0]) * 0.55),
+                 xytext=(0.30, ymax * 0.36), fontsize=BASE_FS - 2.5, color="#666",
+                 arrowprops=dict(arrowstyle="-", color="#888", lw=0.6))
+    axB.set_xlabel("Pairwise Tanimoto similarity", fontsize=BASE_FS - 1)
+    axB.set_ylabel("Density", fontsize=BASE_FS - 1)
+    axB.set_xlim(0, 0.8)
+    axB.legend(fontsize=BASE_FS - 2.7, loc="upper right", frameon=False, labelspacing=0.3)
+    for sp in ["top", "right"]:
+        axB.spines[sp].set_visible(False)
+    axB.text(-0.02, 1.04, "B" if PANEL_CASE=="upper" else "b", transform=axB.transAxes, fontsize=PANEL_LAB_FS,
+             fontweight="bold", va="bottom", ha="right")
+
+    fig.tight_layout(w_pad=1.6)
     return save(fig, "fig03_similarity_network.png")
+
 
 
 def fig4():
@@ -414,7 +441,7 @@ def fig4():
     axa.set_xticks(range(4)); axa.set_xticklabels(["West", "E.Asia", "S.Asia", "Africa"], rotation=20, ha="right")
     axa.set_yticks([0.5, 0.6, 0.7, 0.8, 0.9]); axa.set_ylim(0.45, 0.97)
     axa.set_ylabel("overall accuracy")
-    axa.set_title("Accuracy falls with\ncultural distance", fontsize=BASE_FS)
+    _title(axa, "Accuracy falls with\ncultural distance", fontsize=BASE_FS)
     axa.legend(frameon=False, fontsize=BASE_FS - 2.5, loc="upper right", bbox_to_anchor=(1.02, 1.02))
     axa.text(0.03, 0.04, "\u2191 higher = better", transform=axa.transAxes,
              fontsize=BASE_FS - 2.5, color="#888")
@@ -425,7 +452,7 @@ def fig4():
     tasks = {"correct_bioactivity": "bioactivity", "correct_food": "food\nsource",
              "correct_cultural": "cultural\ncontext", "correct_bioavail": "bio-\navail."}
     M = b.groupby("stratum")[list(tasks)].mean().reindex(order)
-    im = axb.imshow(M.values, cmap="viridis", vmin=0.2, vmax=1.0, aspect="auto")
+    im = axb.imshow(M.values, cmap="cividis", vmin=0.2, vmax=1.0, aspect="auto")
     axb.set_xticks(range(4)); axb.set_xticklabels(list(tasks.values()), fontsize=BASE_FS - 2.3)
     axb.set_yticks(range(4)); axb.set_yticklabels(order, fontsize=BASE_FS - 1.7)
     for i in range(4):
@@ -433,7 +460,7 @@ def fig4():
             v = M.values[i, j]
             axb.text(j, i, f"{v:.2f}", ha="center", va="center", fontsize=BASE_FS - 2.1,
                      color="white" if v < 0.62 else "black", fontweight="bold")
-    axb.set_title("Where the gap concentrates:\nAfrican cultural context is the floor", fontsize=BASE_FS)
+    _title(axb, "Where the gap concentrates:\nAfrican cultural context is the floor", fontsize=BASE_FS)
     cb = fig.colorbar(im, ax=axb, fraction=0.05, pad=0.04, ticks=[0.2, 0.6, 1.0])
     cb.set_label("accuracy", fontsize=BASE_FS - 2.2); cb.ax.tick_params(labelsize=BASE_FS - 2.7)
     axb.set_xticks(np.arange(-0.5, 4, 1), minor=True); axb.set_yticks(np.arange(-0.5, 4, 1), minor=True)
@@ -452,47 +479,77 @@ def fig4():
     axc.axhline(0, color="black", lw=0.7)
     axc.set_xticks([0, 1]); axc.set_xticklabels(["no\ncontext", "+ prove-\nnance"], fontsize=BASE_FS - 2)
     axc.set_ylabel("Western \u2212 African gap"); axc.set_ylim(0, 0.30)
-    axc.set_title("Provenance\ncloses the gap", fontsize=BASE_FS)
+    _title(axc, "Provenance\ncloses the gap", fontsize=BASE_FS)
     for i, c in enumerate(["A", "C"]):
         axc.text(i, gaps[c] + 0.008, f"{gaps[c]:.2f}", ha="center", fontsize=BASE_FS - 1.7, fontweight="bold")
     red = (gaps["A"] - gaps["C"]) / gaps["A"] * 100
     axc.text(0.5, 0.265, f"\u2212{red:.0f}%", ha="center", fontsize=BASE_FS - 1.5,
-             color="#b9770e", fontweight="bold")
+             color="#2b2b2b", fontweight="bold")
     panel_label(axc, "c")
 
     return save(fig, "fig04_illustrative_benchmark.png")
 
 def fig5():
-    """Cross-family generality heatmap: Western-African gap, baseline vs +provenance."""
-    import numpy as np
-    df = D("crossfam")
-    disp = {"Claude (2-tier)":"Claude","qwen2.5:32b":"Qwen2.5-32B","llama3.1:8b":"Llama-3.1-8B",
-            "llama3.1:70b":"Llama-3.1-70B","gemma2:27b":"Gemma-2-27B","mixtral:8x7b":"Mixtral-8\u00d77B"}
-    df["name"] = df["family"].map(disp)
-    df["rowlab"] = df["name"] + "  (" + df["lab"] + ")"
-    df = df.sort_values("gap_A", ascending=False).reset_index(drop=True)
-    M = df[["gap_A", "gap_C"]].values
+    """Before/after accuracy for all six model families: reveals the floor effect that
+    the gap-only view hides (a small gap can mean a weak model OR a strong one)."""
+    D_ = D("accuracy_ba")
+    order = sorted(D_, key=lambda m: -D_[m]["A"]["Overall"])        # strongest -> weakest
+    disp = {"Mixtral-8x7B": "Mixtral-8\u00d77B"}
+    W_COL, AF_COL = STRATUM["Western"], STRATUM["African"]           # shared muted palette
+    GAP_COL, MID = "#c2c2c2", "#8a8a8a"
+    INK = "#1a1a1a"                                                  # dark text
+    n = len(order)
 
-    fig, ax = plt.subplots(figsize=(5.2, 3.7))
-    im = ax.imshow(M, cmap="RdBu_r", vmin=-0.36, vmax=0.36, aspect="auto")
-    ax.set_xticks([0, 1])
-    ax.set_xticklabels(["Baseline\n(name + structure only)", "+ Provenance\n(retrieved origin note)"],
-                       fontsize=BASE_FS - 1.5)
-    ax.set_yticks(range(len(df))); ax.set_yticklabels(df["rowlab"], fontsize=BASE_FS - 1)
-    for i in range(len(df)):
-        for j, col in enumerate(["gap_A", "gap_C"]):
-            v = float(df.iloc[i][col])
-            ax.text(j, i, f"{v:.2f}", ha="center", va="center", fontsize=BASE_FS,
-                    color="white" if (v > 0.22 or v < 0) else "black", fontweight="bold")
-    cb = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.03, ticks=[-0.3, 0, 0.3])
-    cb.set_label("Western \u2212 African accuracy gap\n(0 = no gap; warmer = larger)", fontsize=BASE_FS - 1.5)
-    cb.ax.tick_params(labelsize=BASE_FS - 2)
-    ax.set_title("The cultural gap appears in every model family,\nand cultural provenance closes it in every one",
-                 fontsize=BASE_FS, pad=8)
-    ax.set_xticks(np.arange(-0.5, 2, 1), minor=True); ax.set_yticks(np.arange(-0.5, len(df), 1), minor=True)
-    ax.grid(which="minor", color="white", lw=1.6); ax.tick_params(which="minor", length=0)
-    fig.tight_layout()
+    fig, (axL, axR) = plt.subplots(1, 2, figsize=(COL_2, 4.4), sharey=True)
+    for _pi, (cond, ptitle, ax) in enumerate([("A", "Baseline\n(name + structure only)", axL),
+                             ("C", "+ Provenance\n(retrieved origin note)", axR)]):
+        panel_label(ax, "ab"[_pi], dx=-0.04, dy=1.02)
+        for k, m in enumerate(order):
+            y = n - 1 - k
+            w, af = D_[m][cond]["Western"], D_[m][cond]["African"]
+            ea, sa = D_[m][cond]["East Asian"], D_[m][cond]["South Asian"]
+            ax.plot([af, w], [y, y], color=GAP_COL, lw=2.6, zorder=1, solid_capstyle="round")
+            for v in (ea, sa):
+                ax.plot([v], [y], marker="|", ms=8, mec=MID, mew=1.4, zorder=2)
+            ax.plot([w], [y], "o", ms=8.5, color=W_COL, zorder=3)
+            ax.plot([af], [y], "o", ms=8.5, color=AF_COL, zorder=3)
+            gap = w - af
+            ax.text((af + w) / 2, y + 0.30, f"{gap:.2f}" if gap >= 0 else f"\u2212{abs(gap):.2f}",
+                    ha="center", va="bottom", fontsize=BASE_FS - 2.4, color=INK)
+        _title(ax, ptitle, fontsize=BASE_FS, pad=6)
+        ax.set_xlim(0, 0.9); ax.set_xticks([0, .25, .5, .75])
+        ax.set_xticklabels(["0", "25%", "50%", "75%"], fontsize=BASE_FS - 2)
+        ax.set_ylim(-0.6, n - 0.4); ax.set_xlabel("Accuracy", fontsize=BASE_FS - 1)
+        ax.grid(axis="x", lw=0.5, alpha=0.25); ax.set_axisbelow(True)
+        for sp in ["top", "right", "left"]: ax.spines[sp].set_visible(False)
+        ax.tick_params(left=False)
+
+    axL.set_yticks(range(n))
+    axL.set_yticklabels([f"{disp.get(m, m)}\n{D_[m]['A']['Overall']*100:.0f}% overall"
+                         for m in order[::-1]], fontsize=BASE_FS - 2)
+    # honest annotations: small gap can mean weak (floor) or strong
+    axL.annotate("smallest gap, but lowest\naccuracy \u2014 a floor effect,\nnot fairness",
+                 xy=(D_["Mixtral-8x7B"]["A"]["African"], 0), xytext=(0.015, 0.95),
+                 fontsize=BASE_FS - 2.6, color=INK, va="center",
+                 arrowprops=dict(arrowstyle="->", color=INK, lw=0.9))
+    axL.annotate("small gap because\nstrong everywhere",
+                 xy=(D_["Claude"]["A"]["African"], n - 1), xytext=(0.055, n - 1.15),
+                 fontsize=BASE_FS - 2.6, color=INK, va="center",
+                 arrowprops=dict(arrowstyle="->", color=INK, lw=0.9))
+    axR.text(0.89, -0.5, "higher = better", fontsize=BASE_FS - 2.6, style="italic",
+             color="#555", ha="right")
+
+    leg = [Line2D([0], [0], marker="o", color="w", mfc=W_COL, ms=8, label="Western accuracy"),
+           Line2D([0], [0], marker="o", color="w", mfc=AF_COL, ms=8, label="African accuracy"),
+           Line2D([0], [0], marker="|", color=MID, ms=9, mew=1.4, label="East / South Asian"),
+           Line2D([0], [0], color=GAP_COL, lw=2.6, label="Western\u2013African gap")]
+    fig.legend(handles=leg, loc="upper center", bbox_to_anchor=(0.5, 0.90 if SHOW_TITLES else 0.98),
+               ncol=4, frameon=False, fontsize=BASE_FS - 2.2, handletextpad=0.4, columnspacing=1.5)
+    if SHOW_TITLES:
+        fig.suptitle("Accuracy before and after adding cultural provenance", fontsize=BASE_FS + 1.5, y=1.0)
+    fig.subplots_adjust(top=0.80 if SHOW_TITLES else 0.88, wspace=0.08, left=0.15, right=0.98, bottom=0.11)
     return save(fig, "fig05_crossfamily_heatmap.png")
+
 
 
 def fig6():

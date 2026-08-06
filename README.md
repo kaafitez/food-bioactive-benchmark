@@ -29,7 +29,7 @@ code/
   harness/                      Runnable local-inference harness (Ollama / OpenAI-
                                 compatible). See harness/README.md to reproduce.
   make_all_figures.py           Regenerates the full figure set from data/.
-  make_review_figures.py        Regenerates the review's five figures from data/.
+  make_review_figures.py        Regenerates the review's six figures from data/.
 ```
 
 ## Method (summary)

@@ -1,0 +1,98 @@
+{
+ "Qwen2.5-32B": {
+  "A": {
+   "Western": 0.77,
+   "East Asian": 0.66,
+   "South Asian": 0.48,
+   "African": 0.42,
+   "Overall": 0.5825
+  },
+  "C": {
+   "Western": 0.67,
+   "East Asian": 0.69,
+   "South Asian": 0.5,
+   "African": 0.49,
+   "Overall": 0.5875
+  }
+ },
+ "Llama-3.1-70B": {
+  "A": {
+   "Western": 0.7,
+   "East Asian": 0.66,
+   "South Asian": 0.64,
+   "African": 0.42,
+   "Overall": 0.605
+  },
+  "C": {
+   "Western": 0.7,
+   "East Asian": 0.7,
+   "South Asian": 0.59,
+   "African": 0.56,
+   "Overall": 0.6375
+  }
+ },
+ "Llama-3.1-8B": {
+  "A": {
+   "Western": 0.59,
+   "East Asian": 0.62,
+   "South Asian": 0.49,
+   "African": 0.34,
+   "Overall": 0.51
+  },
+  "C": {
+   "Western": 0.59,
+   "East Asian": 0.64,
+   "South Asian": 0.42,
+   "African": 0.41,
+   "Overall": 0.515
+  }
+ },
+ "Gemma-2-27B": {
+  "A": {
+   "Western": 0.68,
+   "East Asian": 0.7,
+   "South Asian": 0.43,
+   "African": 0.44,
+   "Overall": 0.5625
+  },
+  "C": {
+   "Western": 0.68,
+   "East Asian": 0.69,
+   "South Asian": 0.45,
+   "African": 0.53,
+   "Overall": 0.5875
+  }
+ },
+ "Mixtral-8x7B": {
+  "A": {
+   "Western": 0.53,
+   "East Asian": 0.4,
+   "South Asian": 0.4,
+   "African": 0.38,
+   "Overall": 0.4275
+  },
+  "C": {
+   "Western": 0.36,
+   "East Asian": 0.48,
+   "South Asian": 0.4,
+   "African": 0.41,
+   "Overall": 0.4125
+  }
+ },
+ "Claude": {
+  "A": {
+   "Western": 0.805,
+   "East Asian": 0.79,
+   "South Asian": 0.7,
+   "African": 0.5714,
+   "Overall": 0.7173
+  },
+  "C": {
+   "Western": 0.82,
+   "East Asian": 0.77,
+   "South Asian": 0.74,
+   "African": 0.77,
+   "Overall": 0.775
+  }
+ }
+}
